@@ -1,0 +1,41 @@
+id,key,extrainfo,asm,ben,bodo,en,hi,mr,odia
+31,address_line2,,,,, Address Line 2,,,
+30,address_line1,,,,, Address line 1,,,
+19,using_different_number,,,,," Is your 
+WhatsApp number different?",,,
+34,i_authorize,,,,,"By supplying my contact
+information, I authorize the organiser IndiaKheloFootball and sponsors to
+contact me via personalized communications about their products and services
+via email and phone.",,,
+4,coach,player or coach page,,,,Coach,प्रशिक्षक,,
+18,mobile,,,,,Contact Number,,,
+16,dob,,,,,Date of Birth,,,
+17,email,,,,,Email-id,,,
+15,female,,,,,Female,,,
+23,first_name,,,,,First Name,,,
+12,gender,,,,,Gender,,,
+25,height_text,,,,,Height,,,
+1,ikf_season2_heading,heading,.,.,.,IKF Season 2 City Trial Registration,इंडिया खेलो फुटबॉल सीजन २ रजिस्ट्रेशन,.,.
+24,last_name,,,,,Last Name,,,
+14,male,,,,,Male,,,
+5,next,common,,,,Next,Next,,
+21,no,,,,,No,,,
+32,pincode,,,,,Pincode,,,
+3,player,player or coach page,,,,Player,खिलाड़ी,,
+6,prev,common,,,,Prev,Prev,,
+27,primary_position,,,,,Primary Position,,,
+29,secondary_position,,,,,Secondary Position,,,
+11,dropdown_select_city,,,,,Select City,,,
+13,dropdown_select_gender,,,,,Select Gender,,,
+28,dropdown_select_position,,,,,Select Position,,,
+9,dropdown_select_state,,,,,Select State,,,
+10,select_tournament_city,,,,,"Select the city where you 
+want to attend the trials?",,,
+8,select_tournament_state,,,,,"Select the state where 
+you want to attend the trials?",,,
+33,state,,,,,State,,,
+7,submit,common,,,,Submit,Submit,,
+26,weight_text,,,,,Weight,,,
+22,whatsapp_no,,,,,Whatsapp No.,,,
+2,who_is_filling_form,player or coach page,,,,Who is filling the form?,फॉर्म कौन भर रहा है ?,,
+20,yes,,,,,Yes,,,

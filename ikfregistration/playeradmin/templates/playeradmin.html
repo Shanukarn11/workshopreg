@@ -1,0 +1,64 @@
+{% extends 'baseplayeradmin.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Player Details</h1>
+    <form method="post" id="form123">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<script>
+console.log(document.getElementById("form123"))
+const stateSel=document.getElementById("tournament_state")
+const citySel=document.getElementById("tournament_city")
+const dobid=document.getElementById("dob")
+stateSel.onchange = function(){
+        citySel.length = 1;
+        if(this.value){
+        $.ajax({
+        type: "POST",
+        url: "{% url 'citydata' %}",
+        data:{state:this.value,csrfmiddlewaretoken:'{{ csrf_token }}'},
+        success: function(result){
+                    citydata=JSON.parse(result)
+                    for (var x in citydata) {
+                            citySel.options[citySel.options.length] = new Option((citydata[x].id+"."+citydata[x].value), citydata[x].id);
+                        }
+
+                        
+                }
+        })
+        //ajax city call end
+        }
+}
+                                 
+citySel.onclick=function(){
+if(stateSel.value){
+console.log("")
+}
+else{
+     alert("Please Select State First")
+    }
+}
+
+
+$.ajax({
+    type: "POST",
+    url: "{% url 'limitdate' %}",
+    data:{season:"S03",csrfmiddlewaretoken:'{{ csrf_token }}'},
+    success: function(result){
+     console.log(result);
+     dobid.max=result["upperlimit"];
+     dobid.min=result["lowerlimit"]
+
+    },
+    error:function(error){
+        alert("API Error")
+    }
+    })
+</script>
+{% endblock %}

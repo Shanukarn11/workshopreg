@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="card">
+          <div class="card-header">
+            <div class="d-flex justify-content-center" >
+                <div class="spinner-border"  role="status" >
+                  <span class="sr-only">..</span>
+                </div>
+            </div>
+            <h3 class="text-center">Payment submitted successfully!</h3>
+          </div>
+          <div class="card-body">
+            <p>{{payemnt_successfull_wating_for_confirmation}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    window.onload = function () {
+
+        
+              $.ajax({
+                type: "POST",
+                url: "{% url 'save' %}",
+                data: {
+                  razorpay_unique_id:sessionStorage.getItem("IKF_Player_unique_id"),
+                  
+                  data:sessionStorage.getItem("data"),
+                  status: "success",
+                  razorpay_payment_id: localStorage.getItem("IKF_razorpay_payment_id"),
+                  razorpay_order_id: localStorage.getItem("IKF_razorpay_order_id"),
+                  razorpay_signature: localStorage.getItem("IKF_razorpay_signature"),
+                  error_code: "",
+                  error_description: "",
+                  error_source: "",
+                  error_reason: "",
+                  error_meta_order_id: "",
+                  error_meta_payment_id: "",
+
+                  amount: localStorage.getItem("IKF_Total_Amount") ,
+                  csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+
+                success: function (result) {
+                  if (result) {
+                    $('.spinner-border').hide();
+                    AMOUNTDATA = JSON.parse(result);
+                    console.log(AMOUNTDATA);
+
+                    
+                    sessionStorage.setItem("ikfuniqueid",AMOUNTDATA["ikfuniqueid"])
+
+                    window.location.href = "{% url 'printpdf' %}";
+                  }
+                },
+                error: function (error) {
+                  
+                  alert("Integrity Error");
+                  window.location.href = "{% url 'printpdf' %}";
+                },
+              }); 
+    }
+  </script>
+{% endblock %}
