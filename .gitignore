@@ -160,8 +160,8 @@ cython_debug/
 #.idea/
 
 
-# ikfregistration/media/
-# **/migrations/
-# **/migrations/*.py
-# **/migrations/*.pyc
+ikfregistration/media/
+**/migrations/
+**/migrations/*.py
+**/migrations/*.pyc
 
