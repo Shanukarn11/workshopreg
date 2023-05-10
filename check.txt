@@ -1,0 +1,7 @@
+
+CREATE DATABASE workshopthree CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE USER 'workshopthree'@'localhost' IDENTIFIED BY 'workshopthree@123';
+GRANT ALL PRIVILEGES ON workshopthree .* TO 'workshopthree'@'localhost' WITH GRANT OPTION;
+CREATE USER 'workshopthree'@'%' IDENTIFIED BY 'workshopthree@123';
+GRANT ALL PRIVILEGES ON workshopthree.* TO 'workshopthree'@'%' WITH GRANT OPTION;
+flush privileges;
