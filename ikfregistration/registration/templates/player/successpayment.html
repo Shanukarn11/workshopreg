@@ -23,7 +23,7 @@
   </div>
   <script>
     window.onload = function () {
-
+      
         
               $.ajax({
                 type: "POST",
@@ -32,6 +32,7 @@
                   razorpay_unique_id:sessionStorage.getItem("IKF_Player_unique_id"),
                   
                   data:sessionStorage.getItem("data"),
+                  extrafield1:localStorage.getItem("ikfworkshopcode"),
                   status: "success",
                   razorpay_payment_id: localStorage.getItem("IKF_razorpay_payment_id"),
                   razorpay_order_id: localStorage.getItem("IKF_razorpay_order_id"),

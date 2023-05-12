@@ -8,11 +8,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('registration.urls')),
     # path('coach/', include('registration.coachurls')),
-    # path('dashboard/', include('dashboard.urls')),
-    # path('login/', include('login.urls')),
+    path('dashboard/', include('dashboard.urls')),
+    path('login/', include('login.urls')),
     # path('coachlogin/', include('coachlogin.urls')),
-    # path('playeradmin/', include('playeradmin.urls')),
-    # path('grievance/', include('grievance.urls')),
+    path('playeradmin/', include('playeradmin.urls')),
+    path('grievance/', include('grievance.urls'))
     # path('teams/', include('teams.urls')),
 
 ]

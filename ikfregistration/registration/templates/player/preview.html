@@ -235,24 +235,8 @@ if(sessionStorage.getItem("data")){
   if (PREVIEW_TYPE=="preview2"){
     document.getElementById("next").hidden=true;
     var inputdataforimg=JSON.parse(sessionStorage.getItem("data"))
-    $.ajax({
-              type: "POST",
-              url: "{% url 'amount' %}",
-              data:{data:sessionStorage.getItem("data"),csrfmiddlewaretoken:'{{ csrf_token }}'},
-
-              success: function(result){
-                if(result){
-                  AMOUNT=JSON.parse(result)
-                  console.log(AMOUNT)
-                }
-
-                
-
-              },
-              error:function(error){
-
-              }
-            })
+            AMOUNT=sessionStorage.getItem('DISCOUNTEDAMOUNT')
+            
             const imageBox=document.getElementById("pic_file");
             const fileBox=document.getElementById("document_id_file")
             console.log("inputdataforimg[playeruploadid]")

@@ -4,7 +4,7 @@ from django.contrib import messages
 from registration.coach_models import CoachModel, MasterCoachLabels
 
 from registration.modelhome import SocialMediaLink
-from .models import RazorpayPlayerRelation,MasterAmount, MasterCategory, MasterDateLimit, MasterRoles, MasterSeason, MasterState,MasterCity,MasterGroup,MasterPosition,MasterLabels, FailedPayment,Player,MasterGroupCity,Upload,Uploadfile,MasterDocument, MasterPartner ,MasterColumn
+from .models import RazorpayPlayerRelation,MasterAmount, MasterCategory, MasterDateLimit, MasterRoles, MasterSeason, MasterState,MasterCity,MasterGroup,MasterPosition,MasterLabels, FailedPayment,Player,MasterGroupCity,Upload,Uploadfile,MasterDocument, MasterPartner ,MasterColumn,Lang,ScoutCourse,ScoutCourseDiscount,ScoutDiscountType,WorkShopsReg_Images,WorkShopsRegButton,WorkShopsRegExperts,WorkShopsRegFeatureStrip,TabelWorkshopsReg,TrialsAndInitiativeNav,TrialsAndInitiativeType,ActiveStatusNav,AttendanceStatus,HomeBanner
 # Register your models here.
 import csv
 from django.http import HttpResponse
@@ -98,9 +98,9 @@ class MasterDocumentsAdmin(admin.ModelAdmin):
 class PlayerAdmin(admin.ModelAdmin):
     
     list_filter = ('status','team',"position1",'error_description','gender','group_id','tournament_state', 'tournament_city_id','whatsapp_sent','player_added_interakt',
-                   'primary_position', 'secondary_position','coach_id',)
+                   'primary_position', 'secondary_position','coach_id','extrafield1',)
     list_display = ('id', 'ikfuniqueid',  'first_name',  'last_name','present', 'gender', 'mobile', 'email', 'dob','selection', 'height', 'weight','primary_position', 'secondary_position', 'tournament_city', "tournament_state",
-                    'group_id','whatsapp_sent','player_added_interakt', 'season_id', 'category_id', 'whoisfilling_id', 'status','order_id', 'razorpay_payment_id', 'razorpay_order_id', 'razorpay_signature', 'error_code', 'error_description', 'error_source', 'error_reason', 'error_meta_order_id', 'error_meta_payment_id','document_id_selected','document_id_number','pic_file','document_id_file','created_at','updated_at','team',"position1",'playeruploadid')
+                    'group_id','whatsapp_sent','player_added_interakt', 'season_id', 'category_id', 'whoisfilling_id', 'status','order_id', 'razorpay_payment_id', 'razorpay_order_id', 'razorpay_signature', 'error_code', 'error_description', 'error_source', 'error_reason', 'error_meta_order_id', 'error_meta_payment_id','document_id_selected','document_id_number','pic_file','document_id_file','created_at','updated_at','team',"position1",'playeruploadid','extrafield1',)
     search_fields = ('ikfuniqueid', 'playeruploadid', 'first_name', 'last_name','razorpay_order_id','razorpay_payment_id','error_meta_payment_id','coach_id')
     list_editable = ['present', 'selection']
     # def has_delete_permission(self, request, obj=None):
@@ -192,3 +192,87 @@ class MasterColumnAdmin(admin.ModelAdmin):
 class RazorpayPlayerRelationAdmin(admin.ModelAdmin):
     list_display=('id','order_id')
     search_fields=('id','order_id')
+
+
+@admin.register(ScoutCourse)
+class ScoutCourseAdmin(admin.ModelAdmin):
+    list_display=('id','course','amount')
+    
+
+@admin.register(ScoutDiscountType)
+class ScoutDiscountTypeAdmin(admin.ModelAdmin):
+    list_display=('id','type','length')
+    
+
+@admin.register(ScoutCourseDiscount)
+class ScoutCourseDiscountAdmin(admin.ModelAdmin):
+    list_display=('id','course','type','discount')
+
+
+
+
+
+
+@admin.register(Lang)
+class LangAdmin(admin.ModelAdmin):
+    list_display = ('id', 'lang')
+    search_fields = ('id', 'lang',)
+
+@admin.register(TabelWorkshopsReg)
+class TabelWorkshopsReg(admin.ModelAdmin):
+    list_display = ('id', 'keydata',  'First_Column', 'Second_Column', 'lang', 'attr1', 'attr2', 'attr3', 'attr4',
+                    )
+    search_fields = ('id', 'keydata', 'name')
+
+
+@admin.register(WorkShopsRegButton)
+class WorkShopsRegButton(admin.ModelAdmin):
+    list_display = ('id', 'keydata',  'button_text', 'lang', 'attr1', 'attr2', 'attr3', 'attr4',
+                    )
+    search_fields = ('id', 'keydata', 'name')
+
+
+@admin.register(WorkShopsRegFeatureStrip)
+class WorkShopsRegFeatureStrip(admin.ModelAdmin):
+    list_display = ('id', 'keydata',  'heading', 'paragraph', 'pic', 'lang', 'attr1', 'attr2', 'attr3', 'attr4',
+                    )
+    search_fields = ('id', 'keydata', 'name')
+
+
+@admin.register(WorkShopsRegExperts)
+class WorkShopsRegExperts(admin.ModelAdmin):
+    list_display = ('id', 'keydata',  'heading1', 'heading2', 'button_text', 'paragraph', 'pic', 'lang', 'attr1', 'attr2', 'attr3', 'attr4',
+                    )
+    search_fields = ('id', 'keydata', 'name')
+
+
+@admin.register(WorkShopsReg_Images)
+class WorkShopsReg_Images(admin.ModelAdmin):
+    list_display = ('id', 'keydata', 'size', 'pic', 'name', 'lang',
+                    )
+    search_fields = ('id', 'keydata', 'name')
+
+
+@admin.register(ActiveStatusNav)
+class ActiveStatusNavAdmin(admin.ModelAdmin):
+    list_display = ('id',)
+    search_fields = ('id', )
+
+
+@admin.register(TrialsAndInitiativeType)
+class TrialsAndInitiativeTypeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'keydata')
+    search_fields = ('id', 'keydata',)
+
+
+@admin.register(TrialsAndInitiativeNav)
+class TrialsAndInitiativeNavAdmin(admin.ModelAdmin):
+    list_display = ('id', 'keydata',  'name', 'href', 'description', 'bottomtext', 'listtext', 'pagetype', 'activestatus', 'lang', 'attr1', 'attr2', 'attr3', 'attr4',
+                    )
+    list_filter = ('pagetype',)
+    search_fields = ('id', 'keydata', 'name')
+@admin.register(HomeBanner)
+class HomeBannerAdmin(admin.ModelAdmin):
+    list_display = ('id', 'keydata', 'size', 'pic', 'name', 'heading_1', 'heading_2_colored', 'description', 'button1_text', 'button2_text', 'lang', 'attr1', 'attr2', 'attr3', 'attr4',
+                    )
+    search_fields = ('id', 'keydata', 'name')

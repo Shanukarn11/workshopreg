@@ -42,6 +42,7 @@
           var stringamount = realamount.toString();
           
           var data=JSON.parse(sessionStorage.getItem("data"))
+              
           var customer_name = data['first_name'];
           var mobile=data['mobile']
           
@@ -53,7 +54,7 @@
             name: "India Khelo Football",
             description: "Transaction",
             image:
-              "https://season2.indiakhelofootball.com/static/img/ikflogo.png",
+              "https://season3.indiakhelofootball.com/static/img/ikflogo.png",
             order_id: sessionStorage.getItem("order_id"), //sessionStorage.getItem("order_id")This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             handler: function (response) {
               $('.spinner-border').hide();
@@ -138,26 +139,17 @@
         </script>
 
         <script>
+
+
           var AMOUNTDATA = "";
           window.onload = function () {
+            $('.spinner-border').hide();
+            var Course=sessionStorage.getItem("ikfcourse")
+            var AMOUNTDATA=sessionStorage.getItem("DISCOUNTEDAMOUNT")
+            document.getElementById("payment_amount").value = AMOUNTDATA;
             
-            $.ajax({
-              type: "POST",
-              url: "{% url 'amount' %}",
-              data: {
-                data: sessionStorage.getItem("data"),
-                csrfmiddlewaretoken: "{{ csrf_token }}",
-              },
+            
 
-              success: function (result) {
-                $('.spinner-border').hide();
-                if (result) {
-                  AMOUNTDATA = JSON.parse(result);
-                  document.getElementById("payment_amount").value = AMOUNTDATA;
-                }
-              },
-              error: function (error) {},
-            });
           };
         </script>
       </div>

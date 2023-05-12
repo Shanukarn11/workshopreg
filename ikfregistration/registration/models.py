@@ -256,6 +256,24 @@ class Uploadfile(models.Model):
             output_size = (440, 440)
             img.thumbnail(output_size)
             img.save(self.file.path)
+
+class ScoutCourse(models.Model):
+    id = models.CharField(max_length=100, primary_key=True,db_index=True)
+    course=models.TextField(null=True, blank=True,)
+    amount = models.CharField(max_length=100,null=True,blank=True)
+    extra=models.CharField(max_length=100,null=True, blank=True,)
+class ScoutDiscountType(models.Model):
+    id = models.CharField(max_length=100, primary_key=True,db_index=True)
+    type=models.CharField(max_length=100,null=True, blank=True,)
+    length=models.CharField(max_length=100,null=True, blank=True,)
+    extra=models.CharField(max_length=100,null=True, blank=True,)
+
+class ScoutCourseDiscount(models.Model):
+    id = models.BigAutoField(primary_key=True, db_index=True)
+    course=models.ForeignKey(ScoutCourse,null=True, verbose_name="ScoutCourses", db_index=True, on_delete=models.SET_NULL)
+    type = models.ForeignKey(
+    ScoutDiscountType, null=True, verbose_name="ScoutDiscountTypes", db_index=True, on_delete=models.SET_NULL)
+    discount=models.CharField(max_length=100,null=True, blank=True,)
 class Player(models.Model):
     id = models.BigAutoField(primary_key=True)
     userid = models.CharField(max_length=300,blank=True,)
@@ -349,7 +367,14 @@ class Player(models.Model):
         Uploadfile, null=True, verbose_name="uploadFile_id_frgn",blank=True, db_index=True, on_delete=models.SET_NULL)
     whatsapp_sent = models.BooleanField(null=True,blank=True, default=False, db_index=True)
     player_added_interakt = models.BooleanField(null=True,blank=True, default=False, db_index=True)
-    
+    referral = models.CharField(max_length=100,blank=True,null=True)
+    discount = models.CharField(max_length=100,blank=True,null=True)
+    pan=models.CharField(max_length=200,blank=True,null=True)
+    extrafield1=models.CharField(max_length=200,blank=True,null=True)
+    extrafield2=models.CharField(max_length=200,blank=True,null=True)
+
+    course = models.ForeignKey( 
+        ScoutCourse, null=True, verbose_name="Course", db_index=True, on_delete=models.SET_NULL)    
     
 
     def __repr__(self) -> str:
@@ -421,6 +446,128 @@ class MasterPartner(models.Model):
 
 
 
+class Lang(models.Model):
+    id = models.CharField(max_length=100, primary_key=True, db_index=True)
+    lang = models.CharField(max_length=100,)
+class HomeBanner(models.Model):
+    id = models.BigAutoField(primary_key=True, db_index=True)
+    keydata = models.CharField(max_length=200, null=True, db_index=True)
+    size = models.CharField(max_length=100, null=True, blank=True)
+    pic = models.ImageField(
+        storage=OverwriteStorage(), upload_to='ui/homebanner', null=True, blank=True)
+    name = models.CharField(max_length=200, null=True, blank=True,)
+    heading_1 = models.CharField(max_length=200, null=True, blank=True,)
+    heading_2_colored = models.CharField(
+        max_length=200, null=True, blank=True,)
+
+    description = models.TextField(null=True, blank=True)
+    button1_text = models.CharField(max_length=100, null=True, blank=True)
+    button2_text = models.CharField(max_length=100, null=True, blank=True)
+    lang = models.ForeignKey(
+        Lang, null=True, verbose_name="language21", on_delete=models.SET_NULL, db_index=True)
+    attr1 = models.CharField(max_length=200, null=True, blank=True,)
+    attr2 = models.CharField(max_length=200, null=True, blank=True, )
+    attr3 = models.CharField(max_length=200, null=True, blank=True, )
+    attr4 = models.CharField(max_length=200, null=True, blank=True, )
+
+
+class TabelWorkshopsReg(models.Model):
+    id = models.BigAutoField(primary_key=True, db_index=True)
+    keydata = models.CharField(max_length=200, null=True, db_index=True)
+    First_Column = models.CharField(max_length=200, null=True, db_index=True)
+    Second_Column = models.CharField(max_length=200, null=True, db_index=True)
+    lang = models.ForeignKey(
+        Lang, null=True, verbose_name="language21", on_delete=models.SET_NULL, db_index=True)
+    attr1 = models.CharField(max_length=200, null=True, blank=True,)
+    attr2 = models.CharField(max_length=200, null=True, blank=True, )
+    attr3 = models.CharField(max_length=200, null=True, blank=True, )
+    attr4 = models.CharField(max_length=200, null=True, blank=True, )
+
+class WorkShopsRegButton(models.Model):
+    id = models.BigAutoField(primary_key=True, db_index=True)
+    keydata = models.CharField(max_length=200, null=True, db_index=True)
+    button_text = models.CharField(max_length=200, null=True, db_index=True)
+    lang = models.ForeignKey(
+        Lang, null=True, verbose_name="language21", on_delete=models.SET_NULL, db_index=True)
+    attr1 = models.CharField(max_length=200, null=True, blank=True,)
+    attr2 = models.CharField(max_length=200, null=True, blank=True, )
+    attr3 = models.CharField(max_length=200, null=True, blank=True, )
+    attr4 = models.CharField(max_length=200, null=True, blank=True, )
+
+
+class WorkShopsRegFeatureStrip(models.Model):
+    id = models.BigAutoField(primary_key=True, db_index=True,)
+    keydata = models.CharField(max_length=200, null=True, db_index=True,)
+    heading = models.CharField(max_length=100, null=True, blank=True,)
+    paragraph = models.CharField(max_length=200, null=True, blank=True,)
+    pic = models.ImageField(
+        storage=OverwriteStorage(), upload_to='ui/WorkshopFeatureStrip', null=True, blank=True)
+    lang = models.ForeignKey(
+        Lang, null=True, verbose_name="language21", on_delete=models.SET_NULL, db_index=True,)
+    attr1 = models.CharField(max_length=200, null=True, blank=True,)
+    attr2 = models.CharField(max_length=200, null=True, blank=True, )
+    attr3 = models.CharField(max_length=200, null=True, blank=True, )
+    attr4 = models.CharField(max_length=200, null=True, blank=True, )
+
+
+class WorkShopsRegExperts(models.Model):
+    id = models.BigAutoField(primary_key=True, db_index=True,)
+    keydata = models.CharField(max_length=200, null=True, db_index=True,)
+    heading1 = models.CharField(max_length=100, null=True, blank=True,)
+    heading2 = models.CharField(max_length=100, null=True, blank=True,)
+    paragraph = models.CharField(max_length=500, null=True, blank=True,)
+    button_text = models.CharField(max_length=200, null=True, db_index=True)
+    pic = models.ImageField(
+        storage=OverwriteStorage(), upload_to='ui/LearnFromExperts', null=True, blank=True)
+    lang = models.ForeignKey(
+        Lang, null=True, verbose_name="language21", on_delete=models.SET_NULL, db_index=True,)
+    attr1 = models.CharField(max_length=200, null=True, blank=True,)
+    attr2 = models.CharField(max_length=200, null=True, blank=True, )
+    attr3 = models.CharField(max_length=200, null=True, blank=True, )
+    attr4 = models.CharField(max_length=200, null=True, blank=True, )
+    
+class ActiveStatusNav(models.Model):
+    id = models.CharField(primary_key=True, max_length=200, db_index=True)
+
+
+class TrialsAndInitiativeType(models.Model):
+    id = models.CharField(primary_key=True, max_length=200, db_index=True)
+    keydata = models.CharField(max_length=200, null=True, db_index=True)
+class TrialsAndInitiativeNav(models.Model):
+    id = models.BigAutoField(primary_key=True, db_index=True)
+    keydata = models.CharField(max_length=200, null=True, db_index=True)
+    name = models.CharField(max_length=1000, null=True, blank=True,)
+    href = models.CharField(max_length=100, null=True, blank=True,)
+    description = models.TextField(null=True, blank=True)
+    bottomtext = models.TextField(null=True, blank=True)
+    listtext = models.TextField(null=True, blank=True)
+    pagetype = lang = models.ForeignKey(
+        TrialsAndInitiativeType, null=True, verbose_name="TrialsAndInitiativeType", on_delete=models.SET_NULL, db_index=True)
+    activestatus = models.ForeignKey(
+        ActiveStatusNav, null=True, verbose_name="ActiveStatusNav", on_delete=models.SET_NULL, db_index=True)
+    lang = models.ForeignKey(
+        Lang, null=True, verbose_name="language21", on_delete=models.SET_NULL, db_index=True)
+
+    attr1 = models.CharField(max_length=200, null=True, blank=True,)
+    attr2 = models.CharField(max_length=200, null=True, blank=True, )
+    attr3 = models.CharField(max_length=200, null=True, blank=True, )
+    attr4 = models.CharField(max_length=200, null=True, blank=True, )
+
+
+class WorkShopsReg_Images(models.Model):
+    id = models.BigAutoField(primary_key=True, db_index=True)
+    keydata = models.CharField(max_length=200, null=True, db_index=True)
+    name = models.CharField(max_length=200, null=True, blank=True, )
+
+    size = models.CharField(max_length=100, null=True, blank=True)
+    pic = models.ImageField(
+        storage=OverwriteStorage(), upload_to='ui/WorkShopsReg_Images', null=True, blank=True)
+    lang = models.ForeignKey(
+        Lang, null=True, verbose_name="language27", on_delete=models.SET_NULL, db_index=True)
+    attr1 = models.CharField(max_length=200, null=True, blank=True,)
+    attr2 = models.CharField(max_length=200, null=True, blank=True, )
+    attr3 = models.CharField(max_length=200, null=True, blank=True, )
+    attr4 = models.CharField(max_length=200, null=True, blank=True, )
 
 
 

@@ -27,7 +27,7 @@ import pathlib
 from django.db import transaction
 
 from registration.modelhome import SocialMediaLink
-from .models import MasterAmount, MasterCategory, MasterColumn, MasterDateLimit, MasterDocument, MasterGroup, MasterGroupCity, MasterLabels, MasterPartner, MasterRoles, MasterSeason, MasterState, MasterCity, MasterPosition, Player, Upload, Uploadfile,FailedPayment
+from .models import MasterAmount, MasterCategory, MasterColumn, MasterDateLimit, MasterDocument, MasterGroup, MasterGroupCity, MasterLabels, MasterPartner, MasterRoles, MasterSeason, MasterState, MasterCity, MasterPosition, Player, Upload, Uploadfile,FailedPayment,ScoutCourse,ScoutCourseDiscount,ScoutDiscountType,SelectionStatus,HomeBanner,WorkShopsReg_Images,WorkShopsRegButton,WorkShopsRegExperts,WorkShopsRegFeatureStrip,TabelWorkshopsReg,ActiveStatusNav,TrialsAndInitiativeNav
 from .forms import UploadForm, UploadfileForm
 
 from django.db import IntegrityError
@@ -141,32 +141,63 @@ HOME_PATH = os.path.join(BASE_DIR, 'home')
 STATIC_PATH = os.path.join(BASE_DIR, 'static')
 CONFIG_FILE = 'config_win.json'
 
+def pagelabel(lang):
 
+    langqueryset = list(MasterLabels.objects.filter(
+        ).values('keydata', lang))
+    dictvalue = dict()
+    for item in langqueryset:
+        dictvalue[item['keydata']] = item[lang]
+    return dictvalue
 def homeindex(request):
     lang = "en"
-    langqueryset = MasterLabels.objects.filter().values('keydata', lang)
-    dict = {
+    # langqueryset = MasterLabels.objects.filter().values('keydata', lang)
+    
+    # dict = {
 
-    }
-    socialMediaLink = SocialMediaLink.objects.filter(
-        include=1, type_of_link="social").values('icon', 'url', 'name',)
-    website = SocialMediaLink.objects.filter(
-        include=1, type_of_link="website").values('icon', 'url', 'name',)
-    phone = SocialMediaLink.objects.filter(
-        include=1, type_of_link="phone").values('icon', 'url', 'name',)
+    # }
+    # socialMediaLink = SocialMediaLink.objects.filter(
+    #     include=1, type_of_link="social").values('icon', 'url', 'name',)
+    # website = SocialMediaLink.objects.filter(
+    #     include=1, type_of_link="website").values('icon', 'url', 'name',)
+    # phone = SocialMediaLink.objects.filter(
+    #     include=1, type_of_link="phone").values('icon', 'url', 'name',)
 
-    # for notice board
-    # noticeBoard = NoticeBoard.objects.filter(include=1).values(
-    #     'title', 'description', 'isHeading', 'include',)
-    for item in langqueryset:
-        dict[item['keydata']] = item[lang]
+    # # for notice board
+    # # noticeBoard = NoticeBoard.objects.filter(include=1).values(
+    # #     'title', 'description', 'isHeading', 'include',)
+    # for item in langqueryset:
+    #     dict[item['keydata']] = item[lang]
 
-    dict['social_links'] = socialMediaLink
-    dict['website_links'] = website
-    dict['phone_links'] = phone
-    dict['notice_board'] = ""
-    #printnoticeBoard)
-    return render(request, 'index.html', dict)
+    # dict['social_links'] = socialMediaLink
+    # dict['website_links'] = website
+    # dict['phone_links'] = phone
+    # dict['notice_board'] = ""
+    # #printnoticeBoard)
+    context = pagelabel(lang)
+    workshopsRegimages = WorkShopsReg_Images.objects.filter(lang=lang).values()
+
+    dictvar = dict()
+    for img in workshopsRegimages:
+        dictvar[img['keydata']] = img['pic']
+    
+
+    context['banners'] = HomeBanner.objects.filter(lang=lang).values()
+    context['WorkshopsRegTabel'] = TabelWorkshopsReg.objects.filter(
+        lang=lang).values()
+    context['buttonsReg'] = WorkShopsRegButton.objects.filter(
+        lang=lang).values()
+    context['featurestripsReg'] = WorkShopsRegFeatureStrip.objects.filter(
+        lang=lang).values()
+    context['learnfromexpertsReg'] = WorkShopsRegExperts.objects.filter(
+        lang=lang).values()
+    context['workshopsRegimages'] = dictvar
+    context['TrialsAndInitiativeNav'] = TrialsAndInitiativeNav.objects.filter(pagetype="workshopsreg",
+                                                                              lang=lang).values()
+
+    
+    context['code']=request.GET.get('code')
+    return render(request, 'index.html', context)
 
 
 def category(request, lang):
@@ -498,13 +529,13 @@ def statedata(request):
 
 def citydata(request):
     if request.method == 'POST':
-        state = request.POST.getlist('state')[0]
+        
         #printstate)
     #      try:
 
     #     F.objects.filter().update(status='P')
     #     F.objects.filter(file=filename).update(status='C')
-        city = MasterCity.objects.filter(include=1, state_id=state)
+        city = MasterCity.objects.filter(include=1)
         cityvalue = city.values()
 
         arrayobj = []
@@ -662,6 +693,7 @@ def interakt_add_user(mobilenumber,firstname,lastname,obj):
 def save(request):
     if request.method == 'POST':
         datastr = request.POST.getlist('data')[0]
+        extrafield1=request.POST.getlist('extrafield1')[0]
         dictdata = json.loads(datastr)
 
 
@@ -673,8 +705,7 @@ def save(request):
         player = Player(
             tournament_city=MasterCity.objects.get(
                 id=dictdata['tournament_city']),
-            tournament_state=MasterState.objects.get(
-                id=dictdata['tournament_state']),
+
             gender=dictdata['gender'],
             first_name=dictdata['first_name'],
             last_name=dictdata['last_name'],
@@ -706,7 +737,10 @@ def save(request):
             season=MasterSeason.objects.get(id=dictdata['season']),
             category=MasterCategory.objects.get(id=dictdata['category']),
             whoisfilling=MasterRoles.objects.get(id=dictdata['whoisfilling']),
-            upload_id_frgn=Upload.objects.filter(unique=dictdata['playeruploadid']).last()
+            upload_id_frgn=Upload.objects.filter(unique=dictdata['playeruploadid']).last(),
+            referral = dictdata['referral'],
+            discount = dictdata['discount'],
+            extrafield1=extrafield1,
         )
 
         try:
@@ -716,16 +750,14 @@ def save(request):
                     tournament_city=MasterCity.objects.get(
                         id=dictdata['tournament_city']),
 
-                    tournament_state=MasterState.objects.get(
-                        id=dictdata['tournament_state']),
+        
 
                     playeruploadid=dictdata['playeruploadid'],
                     dob=dictdata['dob'],
                     mobile=dictdata['mobile'],
 
                 )
-                state = MasterState.objects.get(
-                    id=obj.tournament_state_id).name[0:3]
+
                 city = MasterCity.objects.get(
                     id=obj.tournament_city_id).city[0:3].upper()
 
@@ -733,7 +765,7 @@ def save(request):
                 gender = obj.gender[0:1]
                 number = f'{obj.id:06}'
 
-                obj.ikfuniqueid = "IKF" + "S3" + state + city + gender + number + obj.category.id
+                obj.ikfuniqueid = "IKF" + "S3" +  city + gender + number + obj.category.id
                 obj.save() 
                 errordict = {"error": "false",
                              "message": "Saved Successfully", "ikfuniqueid": obj.ikfuniqueid ,"id":obj.id}
@@ -984,3 +1016,20 @@ def successpayment(request):
         dict[item['keydata']] = item[lang]
 
     return render(request, 'player/successpayment.html', dict)
+
+def scoutdiscountamount(request):
+    if request.method == 'POST':
+        typeofdiscount = request.POST.getlist('type')[0]
+        course = request.POST.getlist('course')[0]
+        courseamount=list(ScoutCourse.objects.filter(id=course ).values())
+        if (typeofdiscount == None or typeofdiscount == ""):
+            newdict={}
+            newdict['amount']=float(courseamount[0]['amount'])
+            return JsonResponse(newdict, safe=False)
+        else:
+            scoutamount=list(ScoutCourseDiscount.objects.filter(type=typeofdiscount,course=course ).values())
+            print(float(scoutamount[0]['discount']))
+            print(float(courseamount[0]['amount']))
+            newdict={}
+            newdict['amount']=float(courseamount[0]['amount']) -float(scoutamount[0]['discount'])
+            return JsonResponse(newdict, safe=False)
