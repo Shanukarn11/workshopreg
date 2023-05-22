@@ -140,6 +140,22 @@
                     </div>
                 </div>
             </div>
+                          <!-- winner -->
+                          <div class="container woo-entry">
+                            <div class=" m-b30">
+                                <div class="row blog-post blog-md date-style-2">
+                                    <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
+                                                src="{{ workshopsimages.WorkShopsWinnerIMG }}" alt=""></a> </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-7">
+                                        <div class="dez-post-title ">
+                                            <h2 class="post-title"><a href="#">{{ Heading_WorkshopsWinner }}</a></h2>
+                                        </div>
+                                        <div class="dez-post-text">
+                                            <p class="m-b10">{{ Paragraph_WorkshopsWinner }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
             <div class="section-full bg-white content-inner our-achievements">
                 <div class="container">
                     <div class="section-head text-center ">
@@ -173,6 +189,71 @@
                     </div>
                 </div>
             </div>
+                        <!-- Photos of previous workshop-->
+                        <div class="Section-full">
+                            <div class="Section-full">
+                              <div class="section-head text-center ">
+                                <h2 class="h2">{{ Previous_Workshop }} </h2>
+                                <div class="dez-separator-outer ">
+                                  <div class="dez-separator bg-primary style-liner"></div>
+                                </div>
+                              </div>
+                              <div class="section-content text-center">
+                                <div
+                                  class="owl-carousel img-carousel-content owl-dots-none owl-btn-1 primary lightgallery owl-btn-center-lr"
+                                >
+                                  {% for Previous in previous_workshop %}
+                                  <div class="item">
+                                    <div class="dez-box dez-gallery-box">
+                                      <div class="dez-thum dez-img-overlay1 dez-img-effect zoom-slow">
+                                        <a href="javascript:void(0);">
+                                          <img src={{ Previous.pic}} alt="" />
+                                        </a>
+                                        <div class="overlay-bx">
+                                          <div class="overlay-icon">
+                                            <span
+                                              data-exthumbimage={{ Previous.pic}}
+                                              data-src={{ Previous.pic}}
+                                              class="icon-bx-xs check-km"
+                                              title="Light Gallery Carousel 1"
+                                            >
+                                              <i class="fa fa-picture-o"></i>
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  {%endfor%}
+                                </div>
+                          </div>
+                        
+                                                    <!-- Testimonials --->
+              
+                          <div class="section-full bg-white bg-img-fix content-inner-1">
+                            <div class="container">
+                                <div class="section-head text-center">
+                                    <h2 class="text-uppercase">{{ Testimonials_Workshop }}</h2>
+                                    <div class="dez-separator bg-primary"></div>
+                                </div>
+                                <div class="section-content">
+                                    <div class="owl-carousel owl-theme testimonial-four">
+                                        {% for testimonial in testimonials %}
+                                        <div class="item">
+                                            <div class="testimonial-4 ">
+                                                <div class="testimonial-pic"><img src="{{testimonial.pic}}" width="100"
+                                                        height="100" alt=""></div>
+                                                <div class="testimonial-text text-white">
+                                                    <p>{{testimonial.description}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endfor%}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <!--- Testimonials END --->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="dez-tabs border-tp product-description bg-tabs" style="padding-top:20px ;">

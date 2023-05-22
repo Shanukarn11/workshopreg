@@ -27,7 +27,7 @@ import pathlib
 from django.db import transaction
 
 from registration.modelhome import SocialMediaLink
-from .models import MasterAmount, MasterCategory, MasterColumn, MasterDateLimit, MasterDocument, MasterGroup, MasterGroupCity, MasterLabels, MasterPartner, MasterRoles, MasterSeason, MasterState, MasterCity, MasterPosition, Player, Upload, Uploadfile,FailedPayment,ScoutCourse,ScoutCourseDiscount,ScoutDiscountType,SelectionStatus,HomeBanner,WorkShopsReg_Images,WorkShopsRegButton,WorkShopsRegExperts,WorkShopsRegFeatureStrip,TabelWorkshopsReg,ActiveStatusNav,TrialsAndInitiativeNav
+from .models import MasterAmount, MasterCategory, MasterColumn, MasterDateLimit, MasterDocument, MasterGroup, MasterGroupCity, MasterLabels, MasterPartner, MasterRoles, MasterSeason, MasterState, MasterCity, MasterPosition, Player, Upload, Uploadfile,FailedPayment,ScoutCourse,ScoutCourseDiscount,ScoutDiscountType,SelectionStatus,HomeBanner,WorkShopsReg_Images,WorkShopsRegButton,WorkShopsRegExperts,WorkShopsRegFeatureStrip,TabelWorkshopsReg,ActiveStatusNav,TrialsAndInitiativeNav,Previous_Workshop_Images,Winners_Workshop_Images,Testimonials
 from .forms import UploadForm, UploadfileForm
 
 from django.db import IntegrityError
@@ -190,6 +190,12 @@ def homeindex(request):
     context['featurestripsReg'] = WorkShopsRegFeatureStrip.objects.filter(
         lang=lang).values()
     context['learnfromexpertsReg'] = WorkShopsRegExperts.objects.filter(
+        lang=lang).values()
+    context['previous_workshop'] = Previous_Workshop_Images.objects.filter(
+        lang=lang).values()
+    context['winners_workshop'] = Winners_Workshop_Images.objects.filter(
+        lang=lang).values()
+    context['testimonials'] = Testimonials.objects.filter(
         lang=lang).values()
     context['workshopsRegimages'] = dictvar
     context['TrialsAndInitiativeNav'] = TrialsAndInitiativeNav.objects.filter(pagetype="workshopsreg",

@@ -4,7 +4,7 @@ from django.contrib import messages
 from registration.coach_models import CoachModel, MasterCoachLabels
 
 from registration.modelhome import SocialMediaLink
-from .models import RazorpayPlayerRelation,MasterAmount, MasterCategory, MasterDateLimit, MasterRoles, MasterSeason, MasterState,MasterCity,MasterGroup,MasterPosition,MasterLabels, FailedPayment,Player,MasterGroupCity,Upload,Uploadfile,MasterDocument, MasterPartner ,MasterColumn,Lang,ScoutCourse,ScoutCourseDiscount,ScoutDiscountType,WorkShopsReg_Images,WorkShopsRegButton,WorkShopsRegExperts,WorkShopsRegFeatureStrip,TabelWorkshopsReg,TrialsAndInitiativeNav,TrialsAndInitiativeType,ActiveStatusNav,AttendanceStatus,HomeBanner
+from .models import RazorpayPlayerRelation,MasterAmount, MasterCategory, MasterDateLimit, MasterRoles, MasterSeason, MasterState,MasterCity,MasterGroup,MasterPosition,MasterLabels, FailedPayment,Player,MasterGroupCity,Upload,Uploadfile,MasterDocument, MasterPartner ,MasterColumn,Lang,ScoutCourse,ScoutCourseDiscount,ScoutDiscountType,WorkShopsReg_Images,WorkShopsRegButton,WorkShopsRegExperts,WorkShopsRegFeatureStrip,TabelWorkshopsReg,TrialsAndInitiativeNav,TrialsAndInitiativeType,ActiveStatusNav,AttendanceStatus,HomeBanner,Winners_Workshop_Images,Previous_Workshop_Images,Testimonials
 # Register your models here.
 import csv
 from django.http import HttpResponse
@@ -274,5 +274,24 @@ class TrialsAndInitiativeNavAdmin(admin.ModelAdmin):
 @admin.register(HomeBanner)
 class HomeBannerAdmin(admin.ModelAdmin):
     list_display = ('id', 'keydata', 'size', 'pic', 'name', 'heading_1', 'heading_2_colored', 'description', 'button1_text', 'button2_text', 'lang', 'attr1', 'attr2', 'attr3', 'attr4',
+                    )
+    search_fields = ('id', 'keydata', 'name')
+
+
+@admin.register(Previous_Workshop_Images)
+class Previous_Workshop_Images(admin.ModelAdmin):
+    list_display = ('id', 'keydata', 'size', 'pic', 'lang',
+                    )
+    search_fields = ('id', 'keydata', 'name')
+
+@admin.register(Winners_Workshop_Images)
+class Winners_Workshop_Images(admin.ModelAdmin):
+    list_display = ('id', 'keydata', 'size', 'pic', 'lang',
+                    )
+    search_fields = ('id', 'keydata', 'name')
+
+@admin.register(Testimonials)
+class Testimonials(admin.ModelAdmin):
+    list_display = ('id', 'keydata', 'size', 'pic','description', 'lang',
                     )
     search_fields = ('id', 'keydata', 'name')
