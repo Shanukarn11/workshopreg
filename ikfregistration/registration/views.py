@@ -617,7 +617,7 @@ def send_whatsapp_public_message(mobilenumber,firstname,lastname,obj):
         'callbackData': 'Succesfully sent Message',
         'type': 'Template',
         'template': {
-            'name': 'registration',
+            'name': 'workshopregistrationsuccess',
             'languageCode': 'en',
             'headerValues': [
                 
@@ -648,7 +648,7 @@ def send_whatsapp_public_message(mobilenumber,firstname,lastname,obj):
     
 def interakt_add_user(mobilenumber,firstname,lastname,obj):
     city=MasterCity.objects.get(id=obj.tournament_city_id).city
-    state=MasterState.objects.get(id=obj.tournament_state_id).name
+   
     primary_position=MasterPosition.objects.get(id=obj.primary_position_id).label
     secondary_position=MasterPosition.objects.get(id=obj.secondary_position_id).label
     
@@ -675,10 +675,10 @@ def interakt_add_user(mobilenumber,firstname,lastname,obj):
         "primary_position": primary_position,
         "secondary_position":secondary_position,
         "city":city,
-        "state":state
+       
 
     },
-    "tags": ["S3",city]
+    "tags": ["Workshop",city]
 }
     try:
         response = requests.post(url, headers=headers, data=json.dumps(payload))
@@ -699,9 +699,19 @@ def interakt_add_user(mobilenumber,firstname,lastname,obj):
 def save(request):
     if request.method == 'POST':
         datastr = request.POST.getlist('data')[0]
+        print(datastr)
         extrafield1=request.POST.getlist('extrafield1')[0]
         dictdata = json.loads(datastr)
-
+        razorpay_payment_id=""
+        razorpay_order_id=""
+        razorpay_signature=""
+        
+        if (request.POST.getlist('razorpay_payment_id')[0]):
+            razorpay_payment_id=request.POST.getlist('razorpay_payment_id')[0]
+        if(request.POST.getlist('razorpay_order_id')[0]):
+            razorpay_order_id=request.POST.getlist('razorpay_order_id')[0]
+        if(request.POST.getlist('razorpay_signature')[0]):
+            razorpay_signature=request.POST.getlist('razorpay_signature')[0]
 
         context = {}
 
@@ -727,9 +737,9 @@ def save(request):
             dob=dictdata['dob'],
              status=request.POST.getlist('status')[0],
              razorpay_unique_id=request.POST.getlist('razorpay_unique_id')[0],
-             razorpay_payment_id=request.POST.getlist('razorpay_payment_id')[0],
-             razorpay_order_id=request.POST.getlist('razorpay_order_id')[0],
-             razorpay_signature=request.POST.getlist('razorpay_signature')[0],
+             razorpay_payment_id=razorpay_payment_id,
+             razorpay_order_id=razorpay_order_id,
+             razorpay_signature=razorpay_signature,
 
 
              amount=request.POST.getlist('amount')[0],

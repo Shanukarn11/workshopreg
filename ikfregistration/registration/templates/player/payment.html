@@ -61,6 +61,12 @@
               localStorage.setItem("IKF_razorpay_payment_id",response.razorpay_payment_id)
               localStorage.setItem("IKF_razorpay_order_id",response.razorpay_order_id)
               localStorage.setItem("IKF_razorpay_signature",response.razorpay_signature)
+              if(response){
+              localStorage.setItem("IKF_razorpay_payment_id",response.razorpay_payment_id)
+              localStorage.setItem("IKF_razorpay_order_id",response.razorpay_order_id)
+              localStorage.setItem("IKF_razorpay_signature",response.razorpay_signature)
+
+              }
               window.location.href = "{% url 'successpayment' %}";
 
 

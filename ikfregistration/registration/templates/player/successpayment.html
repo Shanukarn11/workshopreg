@@ -23,7 +23,10 @@
   </div>
   <script>
     window.onload = function () {
-      
+              var workshopcode=""
+              if(localStorage.getItem("ikfworkshopcode")){
+                workshopcode=localStorage.getItem("ikfworkshopcode")
+              }
         
               $.ajax({
                 type: "POST",
@@ -32,7 +35,7 @@
                   razorpay_unique_id:sessionStorage.getItem("IKF_Player_unique_id"),
                   
                   data:sessionStorage.getItem("data"),
-                  extrafield1:localStorage.getItem("ikfworkshopcode"),
+                  extrafield1:workshopcode,
                   status: "success",
                   razorpay_payment_id: localStorage.getItem("IKF_razorpay_payment_id"),
                   razorpay_order_id: localStorage.getItem("IKF_razorpay_order_id"),
