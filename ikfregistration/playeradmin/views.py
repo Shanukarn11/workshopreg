@@ -127,8 +127,7 @@ def playerdetails(request):
                 newplayerobj=Player.objects.get(id=player.id)
                 try:
 
-                    state = MasterState.objects.get(
-                        id=newplayerobj.tournament_state_id).name[0:3]
+                   
                     city = MasterCity.objects.get(
                         id=newplayerobj.tournament_city_id).city[0:3].upper()
 
@@ -136,7 +135,7 @@ def playerdetails(request):
                     gender = newplayerobj.gender[0:1]
                     number = f'{newplayerobj.id:06}'
                     
-                    newplayerobj.ikfuniqueid = "IKF" + "S3" + state + city + gender + number + newplayerobj.category.id
+                    newplayerobj.ikfuniqueid = "IKF" + "S3" + city + gender + number + newplayerobj.category.id
                     newplayerobj.save() 
                     print("testing the player after save")
                     print(player.mobile)
