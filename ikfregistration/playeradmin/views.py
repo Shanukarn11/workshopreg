@@ -26,7 +26,7 @@ def send_whatsapp_public_message(mobilenumber,firstname,lastname,obj):
                 'callbackData': 'Succesfully sent Message',
                 'type': 'Template',
                 'template': {
-                    'name': 'registration',
+                    'name': 'workshopregistrationsuccess',
                     'languageCode': 'en',
                     'headerValues': [
                         
@@ -91,7 +91,7 @@ def interakt_add_user(mobilenumber,firstname,lastname,obj):
                 "state":state
 
             },
-            "tags": ["S3",city]
+            "tags": ["Workshop",city]
         }
             try:
                 response = requests.post(url, headers=headers, data=json.dumps(payload))
