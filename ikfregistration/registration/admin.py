@@ -98,7 +98,7 @@ class MasterDocumentsAdmin(admin.ModelAdmin):
 class PlayerAdmin(admin.ModelAdmin):
     
     list_filter = ('status','team',"position1",'error_description','gender','group_id','tournament_state', 'tournament_city_id','whatsapp_sent','player_added_interakt',
-                   'primary_position', 'secondary_position','coach_id','extrafield1',)
+                   'primary_position', 'secondary_position','coach_id','extrafield1','discount',)
     list_display = ('id', 'ikfuniqueid',  'first_name',  'last_name','present', 'gender', 'mobile', 'email', 'dob','selection', 'height', 'weight','primary_position', 'secondary_position', 'tournament_city', "tournament_state",
                     'group_id','whatsapp_sent','player_added_interakt', 'season_id', 'category_id', 'whoisfilling_id', 'status','order_id', 'razorpay_payment_id', 'razorpay_order_id', 'razorpay_signature', 'error_code', 'error_description', 'error_source', 'error_reason', 'error_meta_order_id', 'error_meta_payment_id','document_id_selected','document_id_number','pic_file','document_id_file','created_at','updated_at','team',"position1",'playeruploadid','extrafield1',)
     search_fields = ('ikfuniqueid', 'playeruploadid', 'first_name', 'last_name','razorpay_order_id','razorpay_payment_id','error_meta_payment_id','coach_id')
