@@ -27,7 +27,7 @@ import pathlib
 from django.db import transaction
 
 from registration.modelhome import SocialMediaLink
-from .models import MasterAmount, MasterCategory, MasterColumn, MasterDateLimit, MasterDocument, MasterGroup, MasterGroupCity, MasterLabels, MasterPartner, MasterRoles, MasterSeason, MasterState, MasterCity, MasterPosition, Player, Upload, Uploadfile,FailedPayment,ScoutCourse,ScoutCourseDiscount,ScoutDiscountType,SelectionStatus,HomeBanner,WorkShopsReg_Images,WorkShopsRegButton,WorkShopsRegExperts,WorkShopsRegFeatureStrip,TabelWorkshopsReg,ActiveStatusNav,TrialsAndInitiativeNav,Previous_Workshop_Images,Winners_Workshop_Images,Testimonials
+from .models import MasterAmount, MasterCategory, MasterColumn, MasterDateLimit, MasterDocument, MasterGroup, MasterGroupCity, MasterLabels, MasterPartner, MasterRoles, MasterSeason, MasterState, MasterCity, MasterPosition, Player, Upload, Uploadfile,FailedPayment,ScoutCourse,ScoutCourseDiscount,ScoutDiscountType,SelectionStatus,HomeBanner,WorkShopsReg_Images,WorkShopsRegButton,WorkShopsRegExperts,WorkShopsRegFeatureStrip,TabelWorkshopsReg,ActiveStatusNav,TrialsAndInitiativeNav,Previous_Workshop_Images,Winners_Workshop_Images,Testimonials,Clubs
 from .forms import UploadForm, UploadfileForm
 
 from django.db import IntegrityError
@@ -193,7 +193,9 @@ def homeindex(request):
         lang=lang).values()
     context['previous_workshop'] = Previous_Workshop_Images.objects.filter(
         lang=lang).values()
-    context['winners_workshop'] = Winners_Workshop_Images.objects.filter(
+    context['winners'] = Winners_Workshop_Images.objects.filter(
+        lang=lang).values()
+    context['clubs'] = Clubs.objects.filter(
         lang=lang).values()
     context['testimonials'] = Testimonials.objects.filter(
         lang=lang).values()
@@ -1049,3 +1051,18 @@ def scoutdiscountamount(request):
             newdict={}
             newdict['amount']=float(courseamount[0]['amount']) -float(scoutamount[0]['discount'])
             return JsonResponse(newdict, safe=False)
+        
+def winnerinfo(request):
+    if request.method == 'POST':
+
+        partnerdata = list(Winners_Workshop_Images.objects.filter().values())
+        
+        
+    return JsonResponse(partnerdata, safe=False)
+def clubinfo(request):
+    if request.method == 'POST':
+
+        partnerdata = list(Clubs.objects.filter().values())
+        
+        
+    return JsonResponse(partnerdata, safe=False)

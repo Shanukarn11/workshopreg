@@ -47,6 +47,8 @@ urlpatterns = [
     path("limitdate",views.limitdate, name='limitdate'),
     path("successpayment",views.successpayment, name='successpayment'),
     path("scoutdiscountamount",views.scoutdiscountamount, name='scoutdiscountamount'),
+    path("winnerinfo",views.winnerinfo, name='winnerinfo'),
+    path("clubinfo",views.clubinfo, name='clubinfo'),
 
 
 

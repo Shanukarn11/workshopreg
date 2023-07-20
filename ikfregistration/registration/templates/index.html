@@ -97,10 +97,10 @@
                                 src="../media/{{ workshopsRegimages.WorkShopsRegSideImage }}" alt=""></a> </div>
                     <div class="col-lg-8 col-md-8 col-sm-7">
                         <div class="dez-post-title ">
-                            <h2 class="post-title"><a href="#">{{ Heading_Workshops2 }}</a></h2>
+                            <h2 class="post-title"><a href="#">{{ Heading_Workshops2|safe }}</a></h2>
                         </div>
                         <div class="dez-post-text">
-                            <p class="m-b10">{{ Paragraph_Workshops2 }}</p>
+                            <p class="m-b10">{{ Paragraph_Workshops2|safe }}</p>
                         </div>
                         <table class="table table-bordered">
                             {% for workshop in WorkshopsRegTabel %}
@@ -262,6 +262,80 @@
                             </div>
                         </div> -->
                             <!--- Testimonials END --->
+       <!-- Winners  -->
+       <!-- <div class="section-full bg-white content-inner">
+        <div class="container">
+          <div class="section-head text-center">
+            <h2 class="h2">{{ winners_home }}</h2>
+            <div class="dez-separator-outer">
+              <div class="dez-separator bg-primary style-liner"></div>
+            </div>
+            <p>{{ winners_paragraph }}</p>
+          </div>
+          <div class="section-content text-center">
+            <div
+              class="owl-carousel owl-theme img-carousel-content mfp-gallery gallery owl-btn-center-lr"
+            >
+              {% for winner in winners %}
+             
+              <div class="item">
+                <div class="dez-box m-b30 dez-img-effect vertical-pan dez-staff">
+                  <div class="dez-media vertical-pan dez-img-effect">
+                    <a href="#">
+                      <img src="../media/{{winner.pic}}" alt="" width="358" height="460" />
+                    </a>
+                  </div>
+                  <div class="p-a15 bg-primary text-white dez-team">
+                    <h4 class="dez-title text-capitalize m-t0">
+                      tt
+                      {{ winner.name|safe }}
+                    </h4>
+                    <div class="dez-separator-outer">
+                      <div class="dez-separator bg-white style-liner"></div>
+                    </div>
+                    <span class="dez-member-position"
+                      >{{winner.category_id}}</span
+                    >
+                   
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- Winners END -->
+    <!-- Clubs -->
+    <!-- <div class="p-b30">
+        <div class="section-head text-center" style="padding-bottom: 20px">
+          <h2 class="h2 text-uppercase">{{ Club_Heading }}</h2>
+          <div class="dez-separator-outer">
+            <div class="dez-separator bg-primary style-liner"></div>
+          </div>
+        </div>
+        <div class="section-content">
+          <div
+            class="owl-carousel owl-theme img-carousel-content mfp-gallery gallery owl-btn-center-lr"
+          >
+            {% for clubs in clubs_partner_home %}
+            <div class="item">
+              <div class="ow-carousel-entry">
+                <div class="ow-entry-media dez-img-effect zoom-slow">
+                  <a href="#"><img src="{{ clubs.pic }}" alt="" /></a>
+                </div>
+                <div class="ow-entry-content">
+                  <div class="ow-entry-title">
+                    <a href="#">{{ clubs.name }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div> -->
+      <!-- Clubs END -->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="dez-tabs border-tp product-description bg-tabs" style="padding-top:20px ;">
@@ -304,7 +378,7 @@
 <!-- Footer -->
 		<!-- Footer -->
 		<footer class="site-footer footer-overlay bg-img-fix"
-			style="background-image: url(images/background/bg5.jpg); background-position: center bottom; background-size: cover; display: block;">
+			style="background-position: center bottom; background-size: cover; display: block;">
 			<div class="footer-top">
 				<div class="container">
 					<div class="row">
