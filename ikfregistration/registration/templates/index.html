@@ -164,6 +164,51 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="container woo-entry mt-5">
+                              <div class=" m-b30">
+                                  <div class="row blog-post blog-md date-style-2">
+                                      <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
+                                                  src="../media/{{ workshopsRegimages.DetailIMG }}" alt=""></a> </div>
+                                      <div class="col-lg-8 col-md-8 col-sm-7">
+                                          <div class="dez-post-title ">
+                                              <h2 class="post-title"><a href="#">{{ Details_Heading }}</a></h2>
+                                          </div>
+                                          <div class="dez-post-text">
+                                              <p class="m-b10">{{ Details_Text|safe }}</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="container woo-entry mt-5">
+                                <div class=" m-b30">
+                                    <div class="row blog-post blog-md date-style-2">
+                                        <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
+                                                    src="../media/{{ workshopsRegimages.AboutIMG }}" alt=""></a> </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-7">
+                                            <div class="dez-post-title ">
+                                                <h2 class="post-title"><a href="#">{{ About_Us_Heading }}</a></h2>
+                                            </div>
+                                            <div class="dez-post-text">
+                                                <p class="m-b10">{{ About_Us_Text |safe }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container woo-entry mt-5">
+                                  <div class=" m-b30">
+                                      <div class="row blog-post blog-md date-style-2">
+                                          <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
+                                                      src="../media/{{ workshopsRegimages.FaqIMG }}" alt=""></a> </div>
+                                          <div class="col-lg-8 col-md-8 col-sm-7">
+                                              <div class="dez-post-title ">
+                                                  <h2 class="post-title"><a href="#">{{ Faq_heading  |safe}}</a></h2>
+                                              </div>
+                                              <div class="dez-post-text">
+                                                  <p class="m-b10">{{ Faq_text  |safe }}</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
             <div class="section-full bg-white content-inner our-achievements">
                 <div class="container">
                     <div class="section-head text-center ">
@@ -338,11 +383,9 @@
       <!-- Clubs END -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="dez-tabs border-tp product-description bg-tabs" style="padding-top:20px ;">
+                    <!-- <div class="dez-tabs border-tp product-description bg-tabs" style="padding-top:20px ;">
                         <ul class="nav nav-tabs">
-                            <!-- <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#web-design-1"><i class="fa fa-globe"></i><span class="title-head"> Description</span></a></li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#graphic-design-1"><i class="fa fa-photo"></i> <span class="title-head">Additional Information</span></a></li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#developement-1"><i class="fa fa-cog"></i><span class="title-head"> Product Review</span></a></li> -->
+                           
                             {% for tab in TrialsAndInitiativeNav %}
                             <li class="nav-item"><a class="nav-link {{ tab.activestatus_id}}" data-toggle="tab"
                                     href="#{{ tab.href }}"><i class="fa fa-globe"></i><span
@@ -367,7 +410,7 @@
                             {% endfor %}
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- Product details -->
