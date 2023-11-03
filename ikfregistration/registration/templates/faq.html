@@ -64,7 +64,7 @@
         style="background-image:url('../media/{{ workshopsRegimages.WorkShopsRegBanner }}');">
         <div class="container">
             <div class="dez-bnr-inr-entry">
-                <h1 class="text-white" style="padding-top:30px ;">{{ Heading_Workshops1 }}</h1>
+                <h1 class="text-white" style="padding-top:30px ;">FAQ</h1>
             </div>
         </div>
     </div>
@@ -73,8 +73,8 @@
     <div class="breadcrumb-row">
         <div class="container">
             <ul class="list-inline">
-                <li><a href="https://indiakhelofootball.com/workshops">Home</a></li>
-                <li>{{ Heading_Workshops1 }}</li>
+                <li><a href="{% url 'homeindex'  %}">Home</a></li>
+                <li>FAQ</li>
                 
                 
                 
@@ -88,146 +88,8 @@
     </div>
     <!-- Breadcrumb row END -->
     <!-- contact area -->
-    <div class="section-full content-inner">
-        <!-- Product details -->
-        <div class="container woo-entry">
-            <div class=" m-b30">
-                <div class="row blog-post blog-md date-style-2">
-                    <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
-                                src="../media/{{ workshopsRegimages.WorkShopsRegSideImage }}" alt=""></a> </div>
-                    <div class="col-lg-8 col-md-8 col-sm-7">
-                        <div class="dez-post-title ">
-                            <h2 class="post-title"><a href="#">{{ Heading_Workshops2|safe }}</a></h2>
-                        </div>
-                        <div class="dez-post-text">
-                            <p class="m-b10">{{ Paragraph_Workshops2|safe }}</p>
-                        </div>
-                        <table class="table table-bordered">
-                            {% for workshop in WorkshopsRegTabel %}
-                            <tr>
-                                <td>{{workshop.First_Column}}</td>
-                                <td>{{workshop.Second_Column}}</td>
-                            </tr>
-                            {% endfor %}
-                        </table>
-                        <form method="post" class="cart"> {% csrf_token %}
-                            <div class="m-tb30">
-                                <a href="{% url 'coachorplayer' 'en' 'Player' %}"
-                                    class="site-button">Register Now
-                                </a>
-                                <a class="site-button" href="{% url 'faq'  %}">Login
-                                </a>
-                                <!-- <a class="site-button" href="../media/ui/download/workshop.pdf"
-                                    download="workshop.pdf">Download
-                                    Brochure</a> -->
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="section-full bg-img-fix content-inner overlay-black-middle our-projects-galery"
-                style="background-image:url('../media/{{workshopsRegimages.WorkShopRegsFeatureBG}}'); background-position:center;">
-                <div class="container">
-                    <div class="row">
-                        {% for feature in featurestripsReg %}
-                        <div class="col-lg-3 col-sm-6 m-b30">
-                            <div
-                                class="border-1 p-a15 text-center text-white skew-triangle left-top hvr-wobble-horizontal">
-                                <div class="sports-icon ">
-                                    <img width="85" height="85" src="../media/{{ feature.pic }}" alt="" />
-                                </div>
-                                <h4 class="text-capitalize">{{ feature.heading }}</h4>
-                                <div class="dez-separator-outer ">
-                                    <div class="dez-separator bg-primary style-liner"></div>
-                                </div>
-                                <p class="m-b0">{{ feature.paragraph }}
-                                </p>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-                          <!-- winner -->
-                          <div class="container woo-entry mt-5">
-                            <div class=" m-b30">
-                                <div class="row blog-post blog-md date-style-2">
-                                    <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
-                                                src="../media/{{ workshopsRegimages.WorkShopsWinnerIMG }}" alt=""></a> </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-7">
-                                        <div class="dez-post-title ">
-                                            <h2 class="post-title"><a href="#">{{ Heading_WorkshopsWinner }}</a></h2>
-                                        </div>
-                                        <div class="dez-post-text">
-                                            <p class="m-b10">{{ Paragraph_WorkshopsWinner }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="section-full bg-white content-inner our-achievements">
-                              <div class="container">
-                                  <div class="section-head text-center ">
-                                      <h2 class="h2 text-uppercase"> {{Heading_Workshops3}}</h2>
-                                      <div class="dez-separator-outer ">
-                                          <div class="dez-separator bg-primary style-liner"></div>
-                                      </div>
-                                      <p>{{Paragraph_Workshops3}}</p>
-                                  </div>
-                                  <div class="section-content text-center ">
-                                      <div class="row m-lr0">
-                                          {%for learn in learnfromexpertsReg %}
-                                          <div class="col-lg-3 col-sm-6 p-a0 m-b30" style="padding-right:20px ;">
-                                              <div class="dez-box dez-media">
-                                                  <img width="292" height="292" src="../media/{{learn.pic}}" alt="">
-                                                  <div
-                                                      class="dez-info-has p-a20 bg-primary text-left skew-triangle right-top text-center">
-                                                      <h4 class="text-capitalize">{{learn.heading1}}</h4>
-                                                      <div class="dez-info-has-text">{{learn.paragraph}}</div>
-                                                      <div class="m-tb30"><a href="{{ learn.attr1 }}"
-                                                              class="site-button outline white border-1">{{learn.button_text}}</a>
-                                                      </div>
-                                                  </div>
-                                                  <div class="dez-title-bx bg-gray p-a20 text-left skew-triangle left-top">
-                                                      <h4 class="m-a0 text-capitalize"> {{learn.heading2}}</h4>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          {%endfor%}
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                            <div class="container woo-entry mt-5">
-                              <div class=" m-b30">
-                                  <div class="row blog-post blog-md date-style-2">
-                                      <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
-                                                  src="../media/{{ workshopsRegimages.DetailIMG }}" alt=""></a> </div>
-                                      <div class="col-lg-8 col-md-8 col-sm-7">
-                                          <div class="dez-post-title ">
-                                              <h2 class="post-title"><a href="#">{{ Details_Heading }}</a></h2>
-                                          </div>
-                                          <div class="dez-post-text">
-                                              <p class="m-b10">{{ Details_Text|safe }}</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="container woo-entry mt-5">
-                                <div class=" m-b30">
-                                    <div class="row blog-post blog-md date-style-2">
-                                        <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
-                                                    src="../media/{{ workshopsRegimages.AboutIMG }}" alt=""></a> </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-7">
-                                            <div class="dez-post-title ">
-                                                <h2 class="post-title"><a href="#">{{ About_Us_Heading }}</a></h2>
-                                            </div>
-                                            <div class="dez-post-text">
-                                                <p class="m-b10">{{ About_Us_Text |safe }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+         
                                 <div class="container woo-entry mt-5">
                                   <div class=" m-b30">
                                       <div class="row blog-post blog-md date-style-2">

@@ -1066,3 +1066,20 @@ def clubinfo(request):
         
         
     return JsonResponse(partnerdata, safe=False)
+
+def faq(request):
+
+    langqueryset = MasterLabels.objects.filter().values('keydata', 'en')
+    dict = {}
+    workshopsRegimages = WorkShopsReg_Images.objects.filter(lang='en').values()
+
+    dictvar ={}
+    for img in workshopsRegimages:
+        dictvar[img['keydata']] = img['pic']
+    for item in langqueryset:
+        dict[item['keydata']] = item['en']
+    dict['workshopsRegimages'] = dictvar
+    # masterroles = MasterRoles.objects.filter(include=1).values()
+    # dict['masterroles'] = masterroles
+
+    return render(request, 'faq.html', dict)

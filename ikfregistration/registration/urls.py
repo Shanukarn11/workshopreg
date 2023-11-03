@@ -49,6 +49,7 @@ urlpatterns = [
     path("scoutdiscountamount",views.scoutdiscountamount, name='scoutdiscountamount'),
     path("winnerinfo",views.winnerinfo, name='winnerinfo'),
     path("clubinfo",views.clubinfo, name='clubinfo'),
+    path("faq",views.faq, name='faq'),
 
 
 
