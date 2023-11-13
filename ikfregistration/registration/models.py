@@ -624,9 +624,3 @@ class Previous_Workshop_Images(models.Model):
 
 
 
-
-
-
-
-
-

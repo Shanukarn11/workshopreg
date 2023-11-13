@@ -195,7 +195,7 @@ def homeindex(request):
         lang=lang).values()
     context['winners'] = Winners_Workshop_Images.objects.filter(
         lang=lang).values()
-    context['clubs'] = Clubs.objects.filter(
+    context['clubs_partner_home'] = Clubs.objects.filter(
         lang=lang).values()
     context['testimonials'] = Testimonials.objects.filter(
         lang=lang).values()
