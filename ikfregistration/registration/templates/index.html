@@ -115,9 +115,9 @@
                                 <!-- <a href="{% url 'coachorplayer' 'en' 'Player' %}"
                                     class="site-button">Register Now
                                 </a> -->
-                                <a class="site-button"  onclick="$('#exampleModalCenter2').modal('show')">{{call_button}}
+                                <a class="site-button"  onclick="$('#exampleModalCenter2').modal('show')">{{call_button | safe}}
                                 </a>
-                                <a class="site-button" href="{% url 'faq'  %}">{{faq_button}}
+                                <a class="site-button" href="{% url 'faq'  %}">{{faq_button | safe}}
                                 </a>
                                 <!-- <a class="site-button" href="../media/ui/download/workshop.pdf"
                                     download="workshop.pdf">Download
@@ -538,7 +538,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle2">Contact Inforamtion :</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle2">{{contactinfo_modal | safe}} :</h5>
           <button type="button" class="close" data-dismiss="modal" onclick="$('#exampleModalCenter2').modal('hide')" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
