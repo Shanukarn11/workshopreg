@@ -112,10 +112,12 @@
                         </table>
                         <form method="post" class="cart"> {% csrf_token %}
                             <div class="m-tb30">
-                                <a href="{% url 'coachorplayer' 'en' 'Player' %}"
+                                <!-- <a href="{% url 'coachorplayer' 'en' 'Player' %}"
                                     class="site-button">Register Now
+                                </a> -->
+                                <a class="site-button"  onclick="$('#exampleModalCenter2').modal('show')">{{call_button}}
                                 </a>
-                                <a class="site-button" href="{% url 'faq'  %}">FAQ
+                                <a class="site-button" href="{% url 'faq'  %}">{{faq_button}}
                                 </a>
                                 <!-- <a class="site-button" href="../media/ui/download/workshop.pdf"
                                     download="workshop.pdf">Download
@@ -518,12 +520,38 @@
         </div>
         <div class="modal-body">
             
+          
           <p><b><h4>Please Note</h4></b> </p>
           <p><b>( Due to Visa issues we have to reschedule workshop date )</b></p>
           <p><b>Rescheduled Date : 1st and 2nd Week of Feb 2023</b></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" onclick="$('#exampleModalCenter').modal('hide')" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter2Title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle2">Contact Inforamtion :</h5>
+          <button type="button" class="close" data-dismiss="modal" onclick="$('#exampleModalCenter2').modal('hide')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            
+          
+          <p><b><h4></h4></b> </p>
+          <p>{{phone_number_modal | safe}}</p>
+          <p>{{email_address_modal | safe}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="$('#exampleModalCenter2').modal('hide')" data-dismiss="modal">Close</button>
           
         </div>
       </div>
