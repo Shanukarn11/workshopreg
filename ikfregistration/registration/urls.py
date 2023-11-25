@@ -27,6 +27,9 @@ urlpatterns = [
     path("save", views.save, name='save'),
     path("amount", views.amount, name="amount"),
     path("order", views.order, name='order'),
+    path("phonepe", views.phonepe, name='phonepe'),
+    path("orderphonepe", views.orderphonepe, name='orderphonepe'),
+    
     path("payment", views.paymentfun, name='payment'),
 
     path("statedata", views.statedata, name='statedata'),

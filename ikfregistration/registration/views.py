@@ -50,6 +50,75 @@ OSS_BUCKET_ACL = "public-read"  # private, public-read, public-read-write
 # # Refer https://www.alibabacloud.com/help/zh/doc-detail/31837.htm about endpoint
 OSS_ENDPOINT = "oss-ap-south-1.aliyuncs.com"
 
+
+### phonepe #######################3333
+from phonepe.sdk.pg.payments.v1.payment_client import PhonePePaymentClient
+from phonepe.sdk.pg.env import Env
+
+# merchant_id = "INDIAKHELONLINE"  
+# salt_key = "2503c515-0817-48e4-bc0a-d504d3c9e629"  
+# salt_index = 1 
+# env = Env.PROD # Change to Env.PROD when you go live
+# ##
+
+# phonepe_client = PhonePePaymentClient(merchant_id=merchant_id, salt_key=salt_key, salt_index=salt_index, env=env)
+# print("Phone Pe Client")
+# print(phonepe_client)
+
+import uuid  
+from phonepe.sdk.pg.payments.v1.models.request.pg_pay_request import PgPayRequest
+
+# unique_transaction_id = str(uuid.uuid4())[:-2]
+# s2s_callback_url = "https://www.merchant.com/callback"  
+# amount = 100  
+# id_assigned_to_user_by_merchant = merchant_id 
+# pay_page_request = PgPayRequest.pay_page_pay_request_builder(merchant_transaction_id=unique_transaction_id,  
+#                                                             amount=amount,  
+#                                                             merchant_user_id=id_assigned_to_user_by_merchant,  
+#                                                             callback_url=s2s_callback_url)  
+# pay_page_response = phonepe_client.pay(pay_page_request)  
+# pay_page_url = pay_page_response.data.instrument_response.redirect_info.url
+# print(pay_page_url)
+def phonepe(request):
+    lang = "en"
+    langqueryset = MasterLabels.objects.filter().values('keydata', lang)
+    dict = {}
+    # for item in langqueryset:
+    #     dict[item['keydata']] = item[lang]
+    # dict["RAZORPAY_KEY_ID"]=os.environ.get('RAZORPAY_KEY_ID')
+    return render(request, 'player/phonepe.html', dict)
+
+def orderphonepe(request):
+    merchant_id = "INDIAKHELONLINE"
+    salt_key = "2503c515-0817-48e4-bc0a-d504d3c9e629"
+    salt_index = 1
+    env = Env.PROD  # Change to Env.PROD when you go live
+
+    phonepe_client = PhonePePaymentClient(merchant_id=merchant_id, salt_key=salt_key, salt_index=salt_index, env=env)
+
+    if request.method == "GET":
+        unique_transaction_id = str(uuid.uuid4())[:-2]
+        s2s_callback_url = "https://usconnect.indiakhelofootball.com/printpdf/"
+        amount = 100
+        id_assigned_to_user_by_merchant = merchant_id
+
+        pay_page_request = PgPayRequest.pay_page_pay_request_builder(
+            merchant_transaction_id=unique_transaction_id,
+            amount=amount,
+            merchant_user_id=id_assigned_to_user_by_merchant,
+            callback_url=s2s_callback_url,
+            redirect_url="https://usconnect.indiakhelofootball.com/printpdf"
+        )
+
+        pay_page_response = phonepe_client.pay(pay_page_request)
+        pay_page_url = pay_page_response.data.instrument_response.redirect_info.url
+
+        return render(request, 'player/phonepe.html', {'pay_page_url': pay_page_url})
+
+    return HttpResponse("Invalid request method")
+
+###################################################################################
+
 def amount(request):
     if request.method == "POST":
         datastr = request.POST.getlist('data')[0]
