@@ -302,39 +302,86 @@ function proceed_to_payment(self){
 
 
     var inputdata=JSON.parse(sessionStorage.getItem("data")) 
+    var workshopcode=""
+              if(localStorage.getItem("ikfworkshopcode")){
+                workshopcode=localStorage.getItem("ikfworkshopcode")
+              }
+    $.ajax({
+                type: "POST",
+                url: "{% url 'save' %}",
+                data: {
+                  razorpay_unique_id:sessionStorage.getItem("IKF_Player_unique_id"),
+                  
+                  data:sessionStorage.getItem("data"),
+                  extrafield1:workshopcode,
+                  status: "initiated",
+                  razorpay_payment_id: "",
+                  razorpay_order_id: "",
+                  razorpay_signature: "",
+                  error_code: "",
+                  error_description: "",
+                  error_source: "",
+                  error_reason: "",
+                  error_meta_order_id: "",
+                  error_meta_payment_id: "",
 
-$.ajax({type: "POST",
-        url: "{% url 'order' %}",
-        data:{mobile:inputdata["mobile"],amount:AMOUNT, csrfmiddlewaretoken:'{{csrf_token}}'} }
-      ) .done(function (result) { 
-        $('.spinner-border').hide();
-                                  console.log(result)
-                                  resultdata=JSON.parse(result)
-                                 if(resultdata['error']=="true"){
-                                               alert(resultdata['message'] )
-                                    }
-                                 else{try{
-          alert("Order ID is generated Successfully");
+                  amount: localStorage.getItem("IKF_Total_Amount") ,
+                  csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
 
-        sessionStorage.setItem("order_id",resultdata['order_id'] )
-        sessionStorage.setItem("IKF_Player_unique_id",resultdata['ikfplayerunique'])
-        window.location="{% url 'payment' %}"
+                success: function (result) {
+                  if (result) {
+                    $('.spinner-border').hide();
+                    AMOUNTDATA = JSON.parse(result);
+                    console.log(AMOUNTDATA);
+
+                    
+                    sessionStorage.setItem("ikfuniqueid",AMOUNTDATA["ikfuniqueid"])
+                    localStorage.setItem("ikfuniqueid",AMOUNTDATA["ikfuniqueid"])
+                    total_amount=sessionStorage.getItem("DISCOUNTEDAMOUNT")
+
+                    window.location.href = '/orderphonepe/' + total_amount;
+                  }
+                },
+                error: function (error) {
+                  
+                  alert("Integrity Error");
+                
+                },
+              }); 
+
+// $.ajax({type: "POST",
+//         url: "{% url 'order' %}",
+//         data:{mobile:inputdata["mobile"],amount:AMOUNT, csrfmiddlewaretoken:'{{csrf_token}}'} }
+//       ) .done(function (result) { 
+//         $('.spinner-border').hide();
+//                                   console.log(result)
+//                                   resultdata=JSON.parse(result)
+//                                  if(resultdata['error']=="true"){
+//                                                alert(resultdata['message'] )
+//                                     }
+//                                  else{try{
+//           alert("Order ID is generated Successfully");
+
+//         sessionStorage.setItem("order_id",resultdata['order_id'] )
+//         sessionStorage.setItem("IKF_Player_unique_id",resultdata['ikfplayerunique'])
+//         window.location="{% url 'payment' %}"
        
         
-        }
-        catch(e){
+//         }
+//         catch(e){
 
-         alert(e.message)
-        }
+//          alert(e.message)
+//         }
 
         
         
-      } 
+//       } 
     
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) { 
-      $('.spinner-border').hide();
-      alert("Order Api Error. Please Try Again") }); 
+//     })
+//     .fail(function (jqXHR, textStatus, errorThrown) { 
+//       $('.spinner-border').hide();
+//       alert("Order Api Error. Please Try Again") }); 
 
   }
 

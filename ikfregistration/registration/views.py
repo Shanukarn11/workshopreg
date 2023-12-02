@@ -51,6 +51,7 @@ OSS_BUCKET_ACL = "public-read"  # private, public-read, public-read-write
 OSS_ENDPOINT = "oss-ap-south-1.aliyuncs.com"
 
 
+
 ### phonepe #######################3333
 from phonepe.sdk.pg.payments.v1.payment_client import PhonePePaymentClient
 from phonepe.sdk.pg.env import Env
@@ -88,18 +89,32 @@ def phonepe(request):
     # dict["RAZORPAY_KEY_ID"]=os.environ.get('RAZORPAY_KEY_ID')
     return render(request, 'player/phonepe.html', dict)
 
-def orderphonepe(request):
+
+env = Env.UAT  # Change to Env.PROD when you go live
+
+if env==Env.PROD:
     merchant_id = "INDIAKHELONLINE"
     salt_key = "2503c515-0817-48e4-bc0a-d504d3c9e629"
     salt_index = 1
-    env = Env.PROD  # Change to Env.PROD when you go live
+    urlpay="https://usconnect.indiakhelofootball.com/"
+else:
+    merchant_id = "PGTESTPAYUAT"
+    salt_key = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399"
+    salt_index = 1  
+    urlpay="http://localhost:8000/"
 
-    phonepe_client = PhonePePaymentClient(merchant_id=merchant_id, salt_key=salt_key, salt_index=salt_index, env=env)
+
+
+phonepe_client = PhonePePaymentClient(merchant_id=merchant_id, salt_key=salt_key, salt_index=salt_index, env=env)
+
+def orderphonepe(request,amountvalue):
 
     if request.method == "GET":
+
         unique_transaction_id = str(uuid.uuid4())[:-2]
-        s2s_callback_url = "https://usconnect.indiakhelofootball.com/printpdf/"
-        amount = 100
+        s2s_callback_url = urlpay+"callback_handler/"
+        
+        amount = 1*100
         id_assigned_to_user_by_merchant = merchant_id
 
         pay_page_request = PgPayRequest.pay_page_pay_request_builder(
@@ -107,16 +122,63 @@ def orderphonepe(request):
             amount=amount,
             merchant_user_id=id_assigned_to_user_by_merchant,
             callback_url=s2s_callback_url,
-            redirect_url="https://usconnect.indiakhelofootball.com/printpdf"
+            
+            redirect_url=urlpay+"successpayment"
         )
 
         pay_page_response = phonepe_client.pay(pay_page_request)
         pay_page_url = pay_page_response.data.instrument_response.redirect_info.url
 
-        return render(request, 'player/phonepe.html', {'pay_page_url': pay_page_url})
+        return render(request, 'player/phonepe.html', {'pay_page_url': pay_page_url,'phonepe_unique_id':unique_transaction_id})
 
     return HttpResponse("Invalid request method")
+def phonepestatus(request):
+    unique_transaction_id = "3b503f82-b23e-46c4-abcd-3802d4ad23"  
+    try:
+       transaction_status_response = phonepe_client.check_status(merchant_transaction_id=unique_transaction_id)  
+   
+       transaction_state = transaction_status_response.data.state
+       return HttpResponse(transaction_state)
+    except Exception as e:
+        print(e)
+        return HttpResponse("FAILED")
+    
+    print(transaction_state)
+    return HttpResponse("status")
+def callback_handler(request):
+    print("CALL BACK FUNCTION")
+    # callback_data = json.loads(request.body.decode('utf-8'))
+    # if request.method == 'GET':
+    #     # Get callback data from request
+    #     print("CALL BACK FUNCTION")
+    #     callback_data = json.loads(request.body.decode('utf-8'))
 
+    #     # Extract necessary information from the callback
+    #     x_verify_header_data = request.headers.get('x-verify')
+    #     phonepe_s2s_callback_response_body_string = json.dumps(callback_data)
+
+    #     # Verify the callback
+    #     is_valid = phonepe_client.verify_response(x_verify=x_verify_header_data, response=phonepe_s2s_callback_response_body_string)
+
+    #     if is_valid:
+    #         # Callback is valid, update your transaction status
+    #         print(is_valid)
+    #         transaction_status = callback_data.get('response', {}).get('status')
+    #         print(transaction_status)
+            
+    #         # Handle the transaction status accordingly
+    #         if transaction_status == 'SUCCESS':
+    #             # Payment was successful, update your database or perform necessary actions
+    #             return HttpResponse("Payment Successful")
+    #         elif transaction_status == 'FAILURE':
+    #             # Payment failed, update your database or perform necessary actions
+    #             return HttpResponse("Payment Failed")
+    #         else:
+    #             # Handle other transaction statuses as needed
+    #             return HttpResponse("Unknown Transaction Status")
+
+    # # Handle other HTTP methods or invalid callbacks
+    return HttpResponse("hello")
 ###################################################################################
 
 def amount(request):
@@ -766,7 +828,47 @@ def interakt_add_user(mobilenumber,firstname,lastname,obj):
     except Exception as e:
         print(e)
         return None
-    
+def update(request):
+    if request.method == 'POST':
+
+        
+        ikfuniqueid=request.POST.getlist('ikfuniqueid')[0]
+        razorpay_unique_id=request.POST.getlist('razorpay_unique_id')[0]
+        unique_transaction_id = razorpay_unique_id  
+        try:
+           transaction_status_response = phonepe_client.check_status(merchant_transaction_id=unique_transaction_id)  
+           transaction_state = transaction_status_response.data.state
+           if(transaction_state=='COMPLETED'):
+                    obj = Player.objects.get(
+                    
+                    ikfuniqueid=ikfuniqueid
+                    )  
+                    obj.status="success"
+                    obj.razorpay_unique_id=razorpay_unique_id
+                    obj.save()
+                    mobilenumber=""
+                    if((obj.whatsapp==None) or (obj.whatsapp=="") or  (obj.whatsapp=="NA") or obj.whatsapp=="undefined"):
+                        mobilenumber=obj.mobile
+                    else:
+                        mobilenumber=obj.whatsapp
+
+                    t1 = threading.Thread(target=send_whatsapp_public_message,args=(mobilenumber,obj.first_name,obj.last_name,obj))
+                    
+                    t2 = threading.Thread(target=interakt_add_user,args=(mobilenumber,obj.first_name,obj.last_name,obj))
+                    t1.start()
+                    t2.start()
+                    t1.join()
+                    t2.join()
+                    return HttpResponse("COMPLETED")
+           else:
+                    return HttpResponse("FAILED")
+               
+           
+        except Exception as e:
+            print(e)
+            return HttpResponse("FAILED")
+
+
 def save(request):
     if request.method == 'POST':
         datastr = request.POST.getlist('data')[0]
@@ -856,19 +958,7 @@ def save(request):
                 obj.save() 
                 errordict = {"error": "false",
                              "message": "Saved Successfully", "ikfuniqueid": obj.ikfuniqueid ,"id":obj.id}
-                mobilenumber=""
-                if((obj.whatsapp==None) or (obj.whatsapp=="") or  (obj.whatsapp=="NA") or obj.whatsapp=="undefined"):
-                    mobilenumber=obj.mobile
-                else:
-                    mobilenumber=obj.whatsapp
 
-                t1 = threading.Thread(target=send_whatsapp_public_message,args=(mobilenumber,obj.first_name,obj.last_name,obj))
-                
-                t2 = threading.Thread(target=interakt_add_user,args=(mobilenumber,obj.first_name,obj.last_name,obj))
-                t1.start()
-                t2.start()
-                t1.join()
-                t2.join()
                
                              
                 return HttpResponse(json.dumps(errordict))

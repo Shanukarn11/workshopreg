@@ -1,11 +1,71 @@
 {% extends "base.html" %} {% block content %}
 
+<div class="glass-morphism-container1" name="form1" id="form1">
+  <div class="d-flex justify-content-center" >
+    <div class="spinner-border"  role="status" >
+      <span class="sr-only">..</span>
+    </div>
+  </div>
+  <h1 class="form-heading">{{heading_payment}}</h1>
+  {% csrf_token %}
 
-<div>
-    <h1>PhonePe Payment</h1>
-    <p>Click the link below to make a payment:</p>
-    <a href="{{ pay_page_url }}" target="_blank"><button>Pay with PhonePe</button></a>
+  <input
+    type="hidden"
+    name="_token"
+    value="b1nCcqafDVGwwKwH5DLWqeD06kDWSQBXGrPwAco3"
+  />
+  <div class="row">
+    <div class="col-lg-12 col-md-6 col-sm-12 mt-3">
+      <div class="form-group">
+       
+        <label class="text-left"
+          >{{payment_amount_label}}<span class="mandatory"></span
+        ></label>
+        <input
+          class="form-control"
+          type="text"
+          name="payment_amount"
+          id="payment_amount"
+          readonly
+          required
+        />
+      </div>
+    </div>
+
+    <div class="text-center col-lg-12 col-md-12 col-sm-12 mt-3">
+      <div class="form-group mb-0">
+        <a href="{{ pay_page_url }}" target="_blank"><button>Pay with PhonePe</button></a>
+  
+
+           
+   
+
+        <script>
+
+
+
+    // window.location.href = "{% url 'successpayment' %}";
+    // window.location.href = "{% url 'paymentfail' %}";
+    
+
+
+          var AMOUNTDATA = "";
+          var phonepe_order_id="{{ phonepe_unique_id }}"
+          console.log(phonepe_order_id)
+          window.onload = function () {
+            $('.spinner-border').hide();
+            localStorage.setItem("phonepe_order_id",phonepe_order_id)
+            var Course=sessionStorage.getItem("ikfcourse")
+            var AMOUNTDATA=sessionStorage.getItem("DISCOUNTEDAMOUNT")
+            document.getElementById("payment_amount").value = AMOUNTDATA;
+            
+            
+
+          };
+        </script>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-{% endblock content %}
+<script></script>
+{% endblock %}

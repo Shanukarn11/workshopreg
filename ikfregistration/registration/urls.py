@@ -25,10 +25,12 @@ urlpatterns = [
     path("viewdoc", views.viewdoc, name='viewdoc'),
     path("viewdocpic", views.viewdocpic, name='viewdocpic'),
     path("save", views.save, name='save'),
+    path("update", views.update, name='update'),
     path("amount", views.amount, name="amount"),
     path("order", views.order, name='order'),
     path("phonepe", views.phonepe, name='phonepe'),
-    path("orderphonepe", views.orderphonepe, name='orderphonepe'),
+    path("orderphonepe/<int:amountvalue>", views.orderphonepe, name='orderphonepe'),
+    path("phonepestatus", views.phonepestatus, name='phonepestatus'),
     
     path("payment", views.paymentfun, name='payment'),
 
@@ -53,6 +55,7 @@ urlpatterns = [
     path("winnerinfo",views.winnerinfo, name='winnerinfo'),
     path("clubinfo",views.clubinfo, name='clubinfo'),
     path("faq",views.faq, name='faq'),
+    path('callback_handler/', views.callback_handler, name='callback_handler'),
 
 
 

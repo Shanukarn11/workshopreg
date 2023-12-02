@@ -144,16 +144,11 @@ function checkempty(data) {
   }
 
 function makepass(){
-  var player_data_str=sessionStorage.getItem('data');
-  var player_data=JSON.parse(player_data_str);
-  console.log(player_data);
 
-
-  var playeruploadid=player_data['playeruploadid'];
-  var ikfuniqueid=sessionStorage.getItem('ikfuniqueid');
+  var ikfuniqueid=localStorage.getItem('ikfuniqueid');
   // var ikf_id_json=JSON.parse(ikf_id);
   console.log(ikfuniqueid);
-  console.log(playeruploadid);
+  
 
   $.ajax({
     type: "POST",
