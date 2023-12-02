@@ -90,7 +90,7 @@ def phonepe(request):
     return render(request, 'player/phonepe.html', dict)
 
 
-env = Env.UAT  # Change to Env.PROD when you go live
+env = Env.PROD  # Change to Env.PROD when you go live
 
 if env==Env.PROD:
     merchant_id = "INDIAKHELONLINE"
