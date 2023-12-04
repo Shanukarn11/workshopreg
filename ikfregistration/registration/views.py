@@ -954,7 +954,7 @@ def save(request):
                 gender = obj.gender[0:1]
                 number = f'{obj.id:06}'
 
-                obj.ikfuniqueid = "IKF" + "S3" +  city + gender + number + obj.category.id
+                obj.ikfuniqueid = "IKF" + "US" +  city + gender + number + obj.category.id
                 obj.save() 
                 errordict = {"error": "false",
                              "message": "Saved Successfully", "ikfuniqueid": obj.ikfuniqueid ,"id":obj.id}

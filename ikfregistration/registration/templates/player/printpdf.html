@@ -43,7 +43,7 @@ h3 {
   <div class="cards_wrapper" style="background-color:#c5d8e6 ;"  id="playerpass">
     <div class="card">
       <div class="card_heading">
-        <h3 style="font-weight: 500; ">{{ikf_season_number_label}} <span id="header_city"></span> {{usconnect_pass}}</h3>
+        <h3 style="font-weight: 500; ">{{ikf_season_number_label}} <span id="header_city" hidden="hidden"></span> {{usconnect_pass}}</h3>
       </div>
       <div class="card_trip">
         <img class="pic_file" alt="PROFILE PIC"
@@ -65,7 +65,7 @@ h3 {
         <div class="divider_right divider_hole">
         </div>
       </div>
-      <div class="tournament_details" style="margin-bottom: 0px;">
+      <!-- <div class="tournament_details" style="margin-bottom: 0px;">
         <div class="details_state">
           <h3 id="tournament_state_id">STATE</h3>
         </div>
@@ -75,13 +75,16 @@ h3 {
         <div class="details_category">
           <h3>CAT <span id="category_age">AGE</span><span style="font-weight: 600;" id="gender">GEN</span></h3>
         </div>
-      </div>
+      </div> -->
        <!-- AADHAR details -->
        {% comment %} <div class="aadhar_details">
         <h3><span id="document_id_selected_id">DOCUMENT TYPE</span> <b>:</b></h3><h3 id="document_id_number">DOCUMENT ID</h3>
       </div> {% endcomment %}
       <div class="aadhar_details" style="text-align: start;">
-        <h3>{{venue_area}} <b>:</b></h3>
+        <h3>{{venue_area | safe}} </h3>
+      </div>
+      <div class="aadhar_details" style="text-align: start;">
+        <h3>{{venue_date | safe}} </h3>
       </div>
       <div class="card_header" >
         <img class="player_id_barcode" alt="BARCODE" style="width:fit-content;height:fit-content; margin-top: 0px;"></img>
