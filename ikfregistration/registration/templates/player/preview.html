@@ -212,7 +212,8 @@ if(sessionStorage.getItem("data")){
                   if(previewdata['gender']=="Female"){
                     previewdata['gender']="{{ girl_text_in_preview }}"
                   }
-                  var textoutput="{{you_are_elgible_for}}" + " " + previewdata['group'] + " "+ previewdata["gender"]+" "+"{{category_for_eligibility}}" +" ( " + previewdata['start'] +"-"+ " "+previewdata['end']+" "+ ")"
+                  // var textoutput="{{you_are_elgible_for}}" + " " + previewdata['group'] + " "+ previewdata["gender"]+" "+"{{category_for_eligibility}}" +" ( " + previewdata['start'] +"-"+ " "+previewdata['end']+" "+ ")"
+                  var textoutput="{{you_are_elgible_for}}"
                   document.getElementById("information_text").innerHTML=textoutput 
                 }
                 else{

@@ -114,7 +114,7 @@ def orderphonepe(request,amountvalue):
         unique_transaction_id = str(uuid.uuid4())[:-2]
         s2s_callback_url = urlpay+"callback_handler/"
         
-        amount = 1*100
+        amount = 17699*100
         id_assigned_to_user_by_merchant = merchant_id
 
         pay_page_request = PgPayRequest.pay_page_pay_request_builder(
@@ -750,7 +750,7 @@ def send_whatsapp_public_message(mobilenumber,firstname,lastname,obj):
         'callbackData': 'Succesfully sent Message',
         'type': 'Template',
         'template': {
-            'name': 'workshopregistrationsuccess',
+            'name': 'usconnectreg',
             'languageCode': 'en',
             'headerValues': [
                 
@@ -811,7 +811,7 @@ def interakt_add_user(mobilenumber,firstname,lastname,obj):
        
 
     },
-    "tags": ["Workshop",city]
+    "tags": ["Usconnect",city]
 }
     try:
         response = requests.post(url, headers=headers, data=json.dumps(payload))
