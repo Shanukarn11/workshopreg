@@ -828,6 +828,22 @@ def interakt_add_user(mobilenumber,firstname,lastname,obj):
     except Exception as e:
         print(e)
         return None
+def updatepaykey(request):
+    if request.method == 'POST':
+
+        
+        ikfuniqueid=request.POST.getlist('ikfuniqueid')[0]
+        razorpay_unique_id=request.POST.getlist('razorpay_unique_id')[0]
+        unique_transaction_id = razorpay_unique_id  
+        obj = Player.objects.get(
+        
+        ikfuniqueid=ikfuniqueid
+        )  
+        
+        obj.razorpay_unique_id=razorpay_unique_id
+        obj.save()
+        return HttpResponse("SUCCESS")
+
 def update(request):
     if request.method == 'POST':
 
@@ -844,7 +860,7 @@ def update(request):
                     ikfuniqueid=ikfuniqueid
                     )  
                     obj.status="success"
-                    obj.razorpay_unique_id=razorpay_unique_id
+                    
                     obj.save()
                     mobilenumber=""
                     if((obj.whatsapp==None) or (obj.whatsapp=="") or  (obj.whatsapp=="NA") or obj.whatsapp=="undefined"):

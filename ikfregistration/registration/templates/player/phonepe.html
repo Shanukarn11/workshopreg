@@ -53,11 +53,39 @@
           var phonepe_order_id="{{ phonepe_unique_id }}"
           console.log(phonepe_order_id)
           window.onload = function () {
-            $('.spinner-border').hide();
+           
             localStorage.setItem("phonepe_order_id",phonepe_order_id)
             var Course=sessionStorage.getItem("ikfcourse")
             var AMOUNTDATA=sessionStorage.getItem("DISCOUNTEDAMOUNT")
-            document.getElementById("payment_amount").value = AMOUNTDATA;
+            document.getElementById("payment_amount").value = 17699;
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'updatepaykey' %}",
+                data: {
+                  razorpay_unique_id:phonepe_order_id,
+                  ikfuniqueid:localStorage.getItem('ikfuniqueid'),
+                  status: "initiated",
+                  csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+
+                success: function (result) {
+                  if (result) {
+                    $('.spinner-border').hide();
+                    
+                  console.log(result)
+                    
+            
+
+                    
+                  }
+                },
+                error: function (error) {
+                  
+                  alert("Integrity Error");
+                  
+                },
+              }); 
             
             
 

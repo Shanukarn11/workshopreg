@@ -26,6 +26,7 @@ urlpatterns = [
     path("viewdocpic", views.viewdocpic, name='viewdocpic'),
     path("save", views.save, name='save'),
     path("update", views.update, name='update'),
+    path("updatepaykey", views.updatepaykey, name='updatepaykey'),
     path("amount", views.amount, name="amount"),
     path("order", views.order, name='order'),
     path("phonepe", views.phonepe, name='phonepe'),
