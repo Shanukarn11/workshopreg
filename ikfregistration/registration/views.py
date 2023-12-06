@@ -90,7 +90,7 @@ def phonepe(request):
     return render(request, 'player/phonepe.html', dict)
 
 
-env = Env.PROD  # Change to Env.PROD when you go live
+env = Env.UAT  # Change to Env.PROD when you go live
 
 if env==Env.PROD:
     merchant_id = "INDIAKHELONLINE"
@@ -107,7 +107,7 @@ else:
 
 phonepe_client = PhonePePaymentClient(merchant_id=merchant_id, salt_key=salt_key, salt_index=salt_index, env=env)
 
-def orderphonepe(request,amountvalue):
+def orderphonepe(request):
 
     if request.method == "GET":
 

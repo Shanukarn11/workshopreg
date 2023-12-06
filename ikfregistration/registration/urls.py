@@ -29,7 +29,7 @@ urlpatterns = [
     path("amount", views.amount, name="amount"),
     path("order", views.order, name='order'),
     path("phonepe", views.phonepe, name='phonepe'),
-    path("orderphonepe/<int:amountvalue>", views.orderphonepe, name='orderphonepe'),
+    path("orderphonepe", views.orderphonepe, name='orderphonepe'),
     path("phonepestatus", views.phonepestatus, name='phonepestatus'),
     
     path("payment", views.paymentfun, name='payment'),

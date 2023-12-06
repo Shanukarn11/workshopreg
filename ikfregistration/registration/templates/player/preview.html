@@ -341,7 +341,7 @@ function proceed_to_payment(self){
                     localStorage.setItem("ikfuniqueid",AMOUNTDATA["ikfuniqueid"])
                     total_amount=sessionStorage.getItem("DISCOUNTEDAMOUNT")
 
-                    window.location.href = '/orderphonepe/' + total_amount;
+                    window.location.href = "{% url 'orderphonepe'  %}" ;
                   }
                 },
                 error: function (error) {
