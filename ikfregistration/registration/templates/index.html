@@ -606,11 +606,13 @@
 //   keyboard: false
 // })
 //     $('#exampleModalCenter').modal('show');
+    localStorage.clear()
     var Code="{{code}}"
   
     localStorage.setItem("ikfworkshopcode",Code)
     console.log(localStorage.getItem("ikfworkshopcode"))
     sessionStorage.clear()
+    
 
   }
   </script>

@@ -34,7 +34,7 @@
 
     <div class="text-center col-lg-12 col-md-12 col-sm-12 mt-3">
       <div class="form-group mb-0">
-        <a href="{{ pay_page_url }}" target="_blank"><button>Pay</button></a>
+        <a id="linkofpayment"><button>Pay</button></a>
   
 
            
@@ -50,14 +50,14 @@
 
 
           var AMOUNTDATA = "";
-          var phonepe_order_id="{{ phonepe_unique_id }}"
+          var phonepe_order_id=sessionStorage.getItem("unique_transaction_id")
           console.log(phonepe_order_id)
           window.onload = function () {
            
             localStorage.setItem("phonepe_order_id",phonepe_order_id)
             var Course=sessionStorage.getItem("ikfcourse")
-            var AMOUNTDATA=sessionStorage.getItem("DISCOUNTEDAMOUNT")
-            document.getElementById("payment_amount").value = 17699;
+            AMOUNTDATA=sessionStorage.getItem("DISCOUNTEDAMOUNT")
+            document.getElementById("payment_amount").value = sessionStorage.getItem("DISCOUNTEDAMOUNT")
 
             $.ajax({
                 type: "POST",
@@ -71,7 +71,15 @@
 
                 success: function (result) {
                   if (result) {
-                    $('.spinner-border').hide();
+                    
+                    var anchorElement = document.getElementById("linkofpayment");
+
+                      // Check if the element exists
+                      if (anchorElement) {
+                          // Set the href attribute dynamically
+                          anchorElement.href = sessionStorage.getItem('pay_page_url');
+                      }
+                      $('.spinner-border').hide();
                     
                   console.log(result)
                     

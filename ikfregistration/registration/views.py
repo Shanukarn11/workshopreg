@@ -111,25 +111,9 @@ def orderphonepe(request):
 
     if request.method == "GET":
 
-        unique_transaction_id = str(uuid.uuid4())[:-2]
-        s2s_callback_url = urlpay+"callback_handler/"
-        
-        amount = 17699*100
-        id_assigned_to_user_by_merchant = merchant_id
 
-        pay_page_request = PgPayRequest.pay_page_pay_request_builder(
-            merchant_transaction_id=unique_transaction_id,
-            amount=amount,
-            merchant_user_id=id_assigned_to_user_by_merchant,
-            callback_url=s2s_callback_url,
-            
-            redirect_url=urlpay+"successpayment"
-        )
 
-        pay_page_response = phonepe_client.pay(pay_page_request)
-        pay_page_url = pay_page_response.data.instrument_response.redirect_info.url
-
-        return render(request, 'player/phonepe.html', {'pay_page_url': pay_page_url,'phonepe_unique_id':unique_transaction_id})
+        return render(request, 'player/phonepe.html')
 
     return HttpResponse("Invalid request method")
 def phonepestatus(request):
@@ -890,6 +874,12 @@ def save(request):
         datastr = request.POST.getlist('data')[0]
         print(datastr)
         extrafield1=request.POST.getlist('extrafield1')[0]
+        discountamount=request.POST.getlist('discountamount')[0]
+        print(type(discountamount))
+        discountamount=int(discountamount)
+        print(discountamount)
+        if(discountamount==None or discountamount=="" or discountamount=="undefined" or discountamount==0):
+            discountamount=17699
         dictdata = json.loads(datastr)
         razorpay_payment_id=""
         razorpay_order_id=""
@@ -931,7 +921,7 @@ def save(request):
              razorpay_signature=razorpay_signature,
 
 
-             amount=request.POST.getlist('amount')[0],
+             amount=discountamount,
 
             playeruploadid=dictdata['playeruploadid'],
      
@@ -975,8 +965,28 @@ def save(request):
                 errordict = {"error": "false",
                              "message": "Saved Successfully", "ikfuniqueid": obj.ikfuniqueid ,"id":obj.id}
 
-               
-                             
+                unique_transaction_id = str(uuid.uuid4())[:-2]
+                s2s_callback_url = urlpay+"callback_handler/"
+                
+                amount = discountamount*100
+                id_assigned_to_user_by_merchant = merchant_id
+
+                pay_page_request = PgPayRequest.pay_page_pay_request_builder(
+                    merchant_transaction_id=unique_transaction_id,
+                    amount=amount,
+                    merchant_user_id=id_assigned_to_user_by_merchant,
+                    callback_url=s2s_callback_url,
+                    
+                    redirect_url=urlpay+"successpayment"
+                )
+
+                pay_page_response = phonepe_client.pay(pay_page_request)
+                pay_page_url = pay_page_response.data.instrument_response.redirect_info.url
+                
+                # return render(request, 'player/phonepe.html', {'pay_page_url': pay_page_url,'phonepe_unique_id':unique_transaction_id})
+                    
+                errordict['pay_page_url']=pay_page_url
+                errordict['unique_transaction_id']=unique_transaction_id
                 return HttpResponse(json.dumps(errordict))
             except Player.DoesNotExist:
                 errordict = {"error": "true",
