@@ -181,6 +181,10 @@ function discountamount(course, type){
 function typeverification(typetext){
     var typetext=typetext.toUpperCase();
     if (typetext.length==7 && typetext.match("[A-Z]{4}[0-9]{3}")){return "discount_a4n3"}
+    else if(typetext.length==6 && typetext.match("[A-Z]{3}[0-9]{3}")){return "discount_a3n3"}
+    else if(typetext.length==7 && typetext.match("[A-Z]{3}[0-9]{4}") ){return "discount_a3n4"}
+    else if(typetext.length==8 && typetext.match("[A-Z]{3}[0-9]{5}") ){return "discount_a3n5"}
+    else if(typetext.length==8 && typetext.match("[A-Z]{4}[0-9]{4}") ){return "discount_a4n4"}
     else if(typetext.length==8 && typetext.match("[A-Z]{5}[0-9]{3}") ){return "discount_a5n3"}
     else if(typetext.length==9 &&  typetext.match("[A-Z]{5}[0-9]{4}")){return "discount_a5n4"}
     else if(typetext.length==10 &&  typetext.match("[A-Z]{5}[0-9]{5}")){return "discount_a5n5"}
