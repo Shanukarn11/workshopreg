@@ -56,6 +56,8 @@ urlpatterns = [
     path("winnerinfo",views.winnerinfo, name='winnerinfo'),
     path("clubinfo",views.clubinfo, name='clubinfo'),
     path("faq",views.faq, name='faq'),
+    path("refund",views.refund, name='refund'),
+    path("term",views.term, name='term'),
     path('callback_handler/', views.callback_handler, name='callback_handler'),
 
 

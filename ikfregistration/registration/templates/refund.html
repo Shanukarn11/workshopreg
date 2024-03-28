@@ -64,7 +64,7 @@
         style="background-image:url('../media/{{ workshopsRegimages.WorkShopsRegBanner }}');">
         <div class="container">
             <div class="dez-bnr-inr-entry">
-                <h1 class="text-white" style="padding-top:30px ;">{{ Heading_Workshops1 }}</h1>
+                <h1 class="text-white" style="padding-top:30px ;">FAQ</h1>
             </div>
         </div>
     </div>
@@ -73,8 +73,8 @@
     <div class="breadcrumb-row">
         <div class="container">
             <ul class="list-inline">
-                <li><a href="https://indiakhelofootball.com/workshops">Home</a></li>
-                <li>{{ Heading_Workshops1 }}</li>
+                <li><a href="{% url 'homeindex'  %}">Home</a></li>
+                <li>FAQ</li>
                 
                 
                 
@@ -88,183 +88,24 @@
     </div>
     <!-- Breadcrumb row END -->
     <!-- contact area -->
-    <div class="section-full content-inner">
-        <!-- Product details -->
-        <div class="container woo-entry">
-            <div class=" m-b30">
-                <div class="row blog-post blog-md date-style-2">
-                    <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
-                                src="../media/{{ workshopsRegimages.WorkShopsRegSideImage }}" alt=""></a> </div>
-                    <div class="col-lg-8 col-md-8 col-sm-7">
-                        <div class="dez-post-title ">
-                            <h2 class="post-title"><a href="#">{{ Heading_Workshops2|safe }}</a></h2>
-                        </div>
-                        <div class="dez-post-text">
-                            <p class="m-b10">{{ Paragraph_Workshops2|safe }}</p>
-                        </div>
-                        <table class="table table-bordered">
-                            {% for workshop in WorkshopsRegTabel %}
-                            <tr>
-                                <td>{{workshop.First_Column}}</td>
-                                <td>{{workshop.Second_Column}}</td>
-                            </tr>
-                            {% endfor %}
-                        </table>
-                        <form method="post" class="cart"> {% csrf_token %}
-                            <div class="m-tb30">
-                                <a href="{% url 'coachorplayer' 'en' 'Player' %}"
-                                    class="site-button">Register Now
-                                </a>
-                                <a class="site-button m-t10"  onclick="$('#exampleModalCenter2').modal('show')">{{call_button | safe}}
-                                </a>
-                                <a class="site-button m-t10" href="{% url 'faq'  %}">{{faq_button | safe}}
-                                </a>
-                                <!-- <a class="site-button" href="../media/ui/download/workshop.pdf"
-                                    download="workshop.pdf">Download
-                                    Brochure</a> -->
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="section-full bg-img-fix content-inner overlay-black-middle our-projects-galery"
-                style="background-image:url('../media/{{workshopsRegimages.WorkShopRegsFeatureBG}}'); background-position:center;">
-                <div class="container">
-                    <div class="row">
-                        {% for feature in featurestripsReg %}
-                        <div class="col-lg-3 col-sm-6 m-b30">
-                            <div
-                                class="border-1 p-a15 text-center text-white skew-triangle left-top hvr-wobble-horizontal">
-                                <div class="sports-icon ">
-                                    <img width="85" height="85" src="../media/{{ feature.pic }}" alt="" />
-                                </div>
-                                <h4 class="text-capitalize">{{ feature.heading }}</h4>
-                                <div class="dez-separator-outer ">
-                                    <div class="dez-separator bg-primary style-liner"></div>
-                                </div>
-                                <p class="m-b0">{{ feature.paragraph }}
-                                </p>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-                          <!-- winner -->
-                          <div class="container woo-entry mt-5">
-                            <div class=" m-b30">
-                                <div class="row blog-post blog-md date-style-2">
-                                    <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
-                                                src="../media/{{ workshopsRegimages.WorkShopsWinnerIMG }}" alt=""></a> </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-7">
-                                        <div class="dez-post-title ">
-                                            <h2 class="post-title"><a href="#">{{ Heading_WorkshopsWinner }}</a></h2>
-                                        </div>
-                                        <div class="dez-post-text">
-                                            <p class="m-b10">{{ Paragraph_WorkshopsWinner }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    <!-- Clubs -->
-    <div class="p-b30">
-      <div class="section-head text-center" style="padding-bottom: 20px">
-        <h2 class="h2 text-uppercase">{{ university_logo_head }}</h2>
 
-        <div class="dez-separator-outer">
-          <div class="dez-separator bg-primary style-liner"></div>
-        </div>
-      </div>
-      <div class="section-content">
-        <div class="section-head text-center" style="padding-bottom: 20px">
-          <h3 >{{ university_logo_body }}</h3>
-        </div>
-        <div
-          class="owl-carousel owl-theme img-carousel-content mfp-gallery gallery owl-btn-center-lr"
-        >
-        
-          {% for clubs in clubs_partner_home %}
-          <div class="item">
-            <div class="ow-carousel-entry">
-              <div class="ow-entry-media dez-img-effect zoom-slow">
-                <a href="#"><img src="../media/{{ clubs.pic }}" alt="" /></a>
-              </div>
-              <div class="ow-entry-content">
-                <div class="ow-entry-title">
-                  <a href="{{clubs.attr2}}">{{clubs.attr1}}</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-      <!-- Clubs END -->
-                            <div class="section-full bg-white content-inner our-achievements">
-                              <div class="container">
-                                  <div class="section-head text-center ">
-                                      <h2 class="h2 text-uppercase"> {{Heading_Workshops3}}</h2>
-                                      <div class="dez-separator-outer ">
-                                          <div class="dez-separator bg-primary style-liner"></div>
-                                      </div>
-                                      <p>{{Paragraph_Workshops3}}</p>
-                                  </div>
-                                  <div class="section-content text-center ">
-                                      <div class="row m-lr0">
-                                          {%for learn in learnfromexpertsReg %}
-                                          <div class="col-lg-3 col-sm-6 p-a0 m-b30" style="padding-right:20px ;">
-                                              <div class="dez-box dez-media">
-                                                  <img width="292" height="292" src="../media/{{learn.pic}}" alt="">
-                                                  <div
-                                                      class="dez-info-has p-a20 bg-primary text-left skew-triangle right-top text-center">
-                                                      <h4 class="text-capitalize">{{learn.heading1}}</h4>
-                                                      <div class="dez-info-has-text">{{learn.paragraph}}</div>
-                                                      <div class="m-tb30"><a href="{{ learn.attr1 }}"
-                                                              class="site-button outline white border-1">{{learn.button_text}}</a>
-                                                      </div>
-                                                  </div>
-                                                  <div class="dez-title-bx bg-gray p-a20 text-left skew-triangle left-top">
-                                                      <h4 class="m-a0 text-capitalize"> {{learn.heading2}}</h4>
-                                                  </div>
+         
+                                <div class="container woo-entry mt-5">
+                                  <div class=" m-b30">
+                                      <div class="row blog-post blog-md date-style-2">
+                                          <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
+                                                      src="../media/{{ workshopsRegimages.FaqIMG }}" alt=""></a> </div>
+                                          <div class="col-lg-8 col-md-8 col-sm-7">
+                                              <div class="dez-post-title ">
+                                                  <h2 class="post-title"><a href="#">{{ refund_heading  |safe}}</a></h2>
+                                              </div>
+                                              <div class="dez-post-text">
+                                                  <p class="m-b10">{{ refund_text  |safe }}</p>
                                               </div>
                                           </div>
-                                          {%endfor%}
                                       </div>
                                   </div>
-                              </div>
-                          </div>
-                            <!-- <div class="container woo-entry mt-5">
-                              <div class=" m-b30">
-                                  <div class="row blog-post blog-md date-style-2">
-                                      <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
-                                                  src="../media/{{ workshopsRegimages.DetailIMG }}" alt=""></a> </div>
-                                      <div class="col-lg-8 col-md-8 col-sm-7">
-                                          <div class="dez-post-title ">
-                                              <h2 class="post-title"><a href="#">{{ Details_Heading }}</a></h2>
-                                          </div>
-                                          <div class="dez-post-text">
-                                              <p class="m-b10">{{ Details_Text|safe }}</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="container woo-entry mt-5">
-                                <div class=" m-b30">
-                                    <div class="row blog-post blog-md date-style-2">
-                                        <div class="col-lg-4 col-md-4  col-sm-5 m-b30"> <a href="#"><img
-                                                    src="../media/{{ workshopsRegimages.AboutIMG }}" alt=""></a> </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-7">
-                                            <div class="dez-post-title ">
-                                                <h2 class="post-title"><a href="#">{{ About_Us_Heading }}</a></h2>
-                                            </div>
-                                            <div class="dez-post-text">
-                                                <p class="m-b10">{{ About_Us_Text |safe }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                
+
 <!--                         
                         <div class="Section-full">
                             <div class="Section-full">
@@ -374,10 +215,39 @@
         </div>
       </div> -->
       <!-- Winners END -->
-
+    <!-- Clubs -->
+    <!-- <div class="p-b30">
+        <div class="section-head text-center" style="padding-bottom: 20px">
+          <h2 class="h2 text-uppercase">{{ Club_Heading }}</h2>
+          <div class="dez-separator-outer">
+            <div class="dez-separator bg-primary style-liner"></div>
+          </div>
+        </div>
+        <div class="section-content">
+          <div
+            class="owl-carousel owl-theme img-carousel-content mfp-gallery gallery owl-btn-center-lr"
+          >
+            {% for clubs in clubs_partner_home %}
+            <div class="item">
+              <div class="ow-carousel-entry">
+                <div class="ow-entry-media dez-img-effect zoom-slow">
+                  <a href="#"><img src="{{ clubs.pic }}" alt="" /></a>
+                </div>
+                <div class="ow-entry-content">
+                  <div class="ow-entry-title">
+                    <a href="#">{{ clubs.name }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div> -->
+      <!-- Clubs END -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="dez-tabs border-tp product-description bg-tabs" style="padding-top:20px ;">
+                    <!-- <div class="dez-tabs border-tp product-description bg-tabs" style="padding-top:20px ;">
                         <ul class="nav nav-tabs">
                            
                             {% for tab in TrialsAndInitiativeNav %}
@@ -404,7 +274,7 @@
                             {% endfor %}
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- Product details -->
@@ -423,7 +293,20 @@
 							<form role="search" method="post" action="script/mailchamp.php"
 								class="dzSubscribe bg-primary p-a20 text-white m-t15">
 								<h2 class="m-tb0 font-40"> Support Us  </h2>
-					
+								<!--<p> Join Asia biggest football community </p>
+								
+								<div class="m-tb15">
+									<ul class="dez-social-icon border dez-social-icon-lg">
+										<li><a href="https://www.facebook.com/officialikf"
+												class="fa fa-facebook fb-btn"></a></li>
+										<li><a href="https://twitter.com/khelo_football	"
+												class="fa fa-twitter tw-btn"></a></li>
+										<li><a href="https://www.instagram.com/indiakhelofootball/"
+												class="fa fa-instagram link-btn"></a></li>
+										<li><a href="https://www.youtube.com/channel/UCX6z5QDccvyipZirUChE7uA/videos"
+												class="fa fa-youtube pin-btn"></a></li>
+									</ul>
+								</div>--->
 								
 								<div class="m-tb30"><a href="https://donation.indiakhelofootball.com/"
 										class="site-button bold black border-40"> Donate </a>
@@ -489,24 +372,6 @@
 							<div class="col-lg-4 text-right "> <span> 80G Registration number:
 									AAICK4512EF20214</span><br><span> CSR Number: CSR00022415</span> </div>
 						</div>
-
-					</div>
-				</div>
-
-        <div class="row mt-3">
-          <div class="col-lg-1 text-left"></div>
-          <div class="col-lg-10 text-left"> <span style="color: #fff !important;">{{ powered_by_mfk_text | safe }}</span> </div>
-          <div class="col-lg-1 text-left"></div>
-        </div>
-
-				<div class="">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-4 text-left"> <a href="{% url 'term' %}">Terms and Condition</a> </div>
-							<div class="col-lg-4 text-center"> <span> </span><br><span></span> </div>
-							<div class="col-lg-4 text-right "> <a href="{% url 'refund' %}"> Refund Policy</a> </div>
-						</div>
-
 					</div>
 				</div>
 
@@ -523,7 +388,6 @@
         </div>
         <div class="modal-body">
             
-          
           <p><b><h4>Please Note</h4></b> </p>
           <p><b>( Due to Visa issues we have to reschedule workshop date )</b></p>
           <p><b>Rescheduled Date : 1st and 2nd Week of Feb 2023</b></p>
@@ -535,72 +399,7 @@
       </div>
     </div>
   </div>
-
-
-  <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter2Title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle2">{{contactinfo_modal | safe}} :</h5>
-          <button type="button" class="close" data-dismiss="modal" onclick="$('#exampleModalCenter2').modal('hide')" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            
-          
-          <p><b><h4></h4></b> </p>
-          <p>{{phone_number_modal | safe}}</p>
-          <p>{{email_address_modal | safe}}</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="$('#exampleModalCenter2').modal('hide')" data-dismiss="modal">Close</button>
-          
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="{% static 'js/jquery.min.js' %}"></script><!-- JQUERY.MIN JS -->
-	<script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script><!-- BOOTSTRAP.MIN JS -->
-	<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script><!-- BOOTSTRAP.MIN JS -->
-	<script src="{% static 'plugins/bootstrap-select/bootstrap-select.min.js' %}"></script><!-- FORM JS -->
-	<script src="{% static 'plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js' %}"></script><!-- FORM JS -->
-	<script src="{% static 'plugins/magnific-popup/magnific-popup.js' %}"></script><!-- MAGNIFIC POPUP JS -->
-	<script src="{% static 'plugins/counter/waypoints-min.js' %}"></script><!-- WAYPOINTS JS -->
-	<script src="{% static 'plugins/counter/counterup.min.js' %}"></script><!-- COUNTERUP JS -->
-	<script src="{% static 'plugins/countdown/jquery.countdown.js' %}"></script><!-- COUNTDOWN JS -->
-	<script src="{% static 'plugins/imagesloaded/imagesloaded.js' %}"></script><!-- IMAGESLOADED -->
-	<script src="{% static 'plugins/masonry/masonry-3.1.4.js' %}"></script><!-- MASONRY -->
-	<script src="{% static 'plugins/masonry/masonry.filter.js' %}"></script><!-- MASONRY -->
-	<script src="{% static 'plugins/owl-carousel/owl.carousel.js' %}"></script><!-- OWL SLIDER -->
-	<script src="{% static 'plugins/lightgallery/js/lightgallery-all.js' %}"></script><!-- LIGHT GALLERY -->
-	<script src="{% static 'js/dz.ajax.js' %}"></script><!-- CONTACT JS  -->
-
-	<script src="{% static 'js/custom.js' %}"></script><!-- CUSTOM FUCTIONS  -->
-	<script src="{% static 'js/dz.carousel.min.js' %}"></script><!-- SORTCODE FUCTIONS  -->
-	<!-- revolution JS FILES -->
-	<script src="{% static 'plugins/revolution/revolution/js/jquery.themepunch.tools.min.js' %}"></script>
-	<script src="{% static 'plugins/revolution/revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
-	<!-- Slider revolution 5.0 Extensions  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
-	<script
-		src="{% static 'plugins/revolution/revolution/js/extensions/revolution.extension.actions.min.js' %}"></script>
-	<script
-		src="{% static 'plugins/revolution/revolution/js/extensions/revolution.extension.carousel.min.js' %}"></script>
-	<script
-		src="{% static 'plugins/revolution/revolution/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
-	<script
-		src="{% static 'plugins/revolution/revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
-	<script
-		src="{% static 'plugins/revolution/revolution/js/extensions/revolution.extension.migration.min.js' %}"></script>
-	<script
-		src="{% static 'plugins/revolution/revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
-	<script
-		src="{% static 'plugins/revolution/revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
-	<script
-		src="{% static 'plugins/revolution/revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
-	<script src="{% static 'plugins/revolution/revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
-	<script src="{% static 'js/rev.slider.js' %}"></script>
-  <!-- <script
+  <script
     src="{% static 'jquery/jquery-3.5.1.min.js' %}"
     integrity=""
     crossorigin="anonymous"
@@ -608,7 +407,7 @@
   <script
     src="{% static 'js/bootstrap.bundle.min.js' %}"
     crossorigin="anonymous"
-  ></script> -->
+  ></script>
 <script>
   window.onload=function(){
 //     $('#exampleModalCenter').modal({ show: false})
@@ -617,13 +416,11 @@
 //   keyboard: false
 // })
 //     $('#exampleModalCenter').modal('show');
-    localStorage.clear()
     var Code="{{code}}"
   
     localStorage.setItem("ikfworkshopcode",Code)
     console.log(localStorage.getItem("ikfworkshopcode"))
     sessionStorage.clear()
-    
 
   }
   </script>
