@@ -112,9 +112,9 @@
                         </table>
                         <form method="post" class="cart"> {% csrf_token %}
                             <div class="m-tb30">
-                                <a href="{% url 'coachorplayer' 'en' 'Player' %}"
+                                <!-- <a href="{% url 'coachorplayer' 'en' 'Player' %}"
                                     class="site-button">Register Now
-                                </a>
+                                </a> -->
                                 <a class="site-button m-t10"  onclick="$('#exampleModalCenter2').modal('show')">{{call_button | safe}}
                                 </a>
                                 <a class="site-button m-t10" href="{% url 'faq'  %}">{{faq_button | safe}}
